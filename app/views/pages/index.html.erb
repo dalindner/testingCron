@@ -2,15 +2,16 @@
 	<h1>Project Planning Assistant</h1>
 </div>
 
-<!-- Single button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    My account <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Login</a></li>
-    <li><a href="#">New Team Member</a></li>
-    <li><a href="#">New Team Leader</a></li>
-	<li><a href="#">New Admin</a></li>
-  </ul>
-</div>
+<% if user_signed_in? %>
+    <% if current_user.role == "Team Member" %>
+      <h1>You are a team member</h1>
+    <% elsif current_user.role == "Team Leader" %>
+      <h1>You are a team leader</h1>
+    <% elsif current_user.role == "Admin"%>
+      <h1>You are an admin</h1>
+    <% else %>
+      <h1>Im confused</h1>
+    <% end %>
+<% else %>
+  <h1>You are not signed in</h1>
+<% end %>

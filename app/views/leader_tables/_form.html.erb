@@ -1,0 +1,17 @@
+<%= form_for(@leader_table) do |f| %>
+  <% if @leader_table.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@leader_table.errors.count, "error") %> prohibited this leader_table from being saved:</h2>
+
+      <ul>
+      <% @leader_table.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

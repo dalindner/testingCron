@@ -1,0 +1,23 @@
+<h1>Listing admin_tables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_tables.each do |admin_table| %>
+      <tr>
+        <td><%= link_to 'Show', admin_table %></td>
+        <td><%= link_to 'Edit', edit_admin_table_path(admin_table) %></td>
+        <td><%= link_to 'Destroy', admin_table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin table', new_admin_table_path %>

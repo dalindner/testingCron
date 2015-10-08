@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :admin_tables
+
+  resources :leader_tables
+
   devise_for :users
 
   devise_scope :user do  
@@ -10,10 +14,6 @@ Rails.application.routes.draw do
   get 'pages/about'
 
   get 'pages/contact'
-
-  get 'pages/test'
-
-  get 'pages/test1'
 
   get 'pages/index'
 

@@ -4,25 +4,50 @@
   <%= devise_error_messages! %>
 
   <div class="form-group">
+    <%= f.label :company %><br />
+    <%= f.text_field :company, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :project %><br />
+    <%= f.text_field :project, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :inputId %><br />
+    <%= f.text_field :inputId, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, class: "form-control" %>
   </div>
 
- 
   <div class="form-group">
-    <%= f.label :age %> <%= f.select :age, ((0..100).map {|i| [i,i] }) %>
+    <%= f.label "Age " %> <%= f.select :age, ((0..100).map {|i| [i,i] }) %>
+    <%= f.label "Gender " %> <%= f.select(:gender, options_for_select([['Male','Male'], ['Female', 'Female']])) %>
+    <%= f.label "Role " %> <%= f.select(:role, options_for_select([['Team Member','Team Member'], ['Team Leader', 'Leader'], ['Admin']])) %>
+    <%= f.label "Specialty " %> <%= f.select(:specialty, options_for_select([['Team Member','Team Member'], ['Team Leader', 'Leader'], ['Admin']]), {include_blank: true})  %>
   </div>
 
-  <div class="control-group">
-    <%= f.label "Gender" %>
-    <div class="controls">
-      <%= f.select(:genderString, options_for_select([['Male','Male'], ['Female', 'Female']])) %>
-    </div>
+  <div class="form-group">
+    <%= f.label :phoneNumber %><br />
+    <%= f.text_field :phoneNumber, autofocus: false, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phoneNumberSecondary %><br />
+    <%= f.text_field :phoneNumberSecondary, autofocus: false, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :emailSecondary %><br />
+    <%= f.email_field :emailSecondary, autofocus: true, class: "form-control" %>
   </div>
 
   <div class="form-group">
