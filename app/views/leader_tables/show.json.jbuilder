@@ -1,1 +1,1 @@
-json.extract! @leader_table, :id, :created_at, :updated_at
+json.extract! @leader_table, :id, :leaderId, :holderId, :created_at, :updated_at

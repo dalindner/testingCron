@@ -42,6 +42,6 @@ class AdminTablesController < ApplicationController
     end
 
     def admin_table_params
-      params[:admin_table]
+      params.require(:admin_table).permit(:adminId, :holderId)
     end
 end
