@@ -7,7 +7,12 @@ class User < ActiveRecord::Base
   validates_presence_of    :name, :on=>:create
   validates_presence_of    :age, :on=>:create
   validates_presence_of :gender, :on=>:create
+  validates_presence_of :company, :on=>:create
   validate :testCheck, :on=>:create
+  validates :phoneNumber, length: {is: 10 }
+  validates :phoneNumber, numericality: true
+  validates :phoneNumberSecondary, length: {is: 10, allow_blank: true } 
+  #validate :password_complexity, :on=>:create
 
 
   def testCheck
@@ -40,6 +45,12 @@ class User < ActiveRecord::Base
   def testLeader
     errors.add(:inputId, "Error, name not hi") unless inputId != "hi"
   end
+
+  #def password_complexity
+  #  if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d). /)
+  #    errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+  #  end
+  #end
 
 
 end
