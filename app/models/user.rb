@@ -4,20 +4,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  validates_presence_of    :name, :on=>:create
-  validates_presence_of    :age, :on=>:create
+  validates_presence_of :name, :on=>:create
+  validates_presence_of :age, :on=>:create
   validates_presence_of :gender, :on=>:create
   validates_presence_of :company, :on=>:create
-  validate :testCheck, :on=>:create
-  validates :phoneNumber, length: {is: 10 }
-  validates :phoneNumber, numericality: true
-  validates :phoneNumberSecondary, length: {is: 10, allow_blank: true } 
+  validates :phoneNumber, format: { with: /\d{10}/, allow_blank: false, message: "must be 10 digits" }
+  validates :phoneNumberSecondary, format: { with: /\d{10}/, allow_blank: true, message: "must be 10 digits or blank" }
+
   #validate :password_complexity, :on=>:create
-
-
-  def testCheck
-    errors.add(:name, "Error, name not hi") unless name != "hi"
-  end
+  validate :specialtyCheck , :on=>:create
 
   def testAdmin
     errors.add(:inputId, "test admin")
@@ -42,15 +37,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def testLeader
-    errors.add(:inputId, "Error, name not hi") unless inputId != "hi"
-  end
-
   #def password_complexity
   #  if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d). /)
   #    errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
   #  end
   #end
 
+  def specialtyCheck
+    errors.add(:specialty, "Error, must select specialty") unless specialty != "Select One"
+  end
 
 end
