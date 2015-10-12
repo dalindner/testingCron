@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   validate :testCheck, :on=>:create
   validate :testAdmin, :on=>:create
 
+  has_and_belongs_to_many :projects
+  
   def testCheck
     errors.add(:name, "Error, name not hi") unless name != "hi"
   end
