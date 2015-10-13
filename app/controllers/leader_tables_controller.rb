@@ -42,6 +42,6 @@ class LeaderTablesController < ApplicationController
     end
 
     def leader_table_params
-      params[:leader_table]
+      params.require(:leader_table).permit(:leaderId, :holderId)
     end
 end

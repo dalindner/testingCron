@@ -13,6 +13,20 @@
 
 ActiveRecord::Schema.define(version: 20151011234123) do
 
+  create_table "admin_tables", force: true do |t|
+    t.string   "adminId"
+    t.string   "holderId"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leader_tables", force: true do |t|
+    t.string   "leaderId"
+    t.string   "holderId"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "leaders", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
@@ -53,19 +67,22 @@ ActiveRecord::Schema.define(version: 20151011234123) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.boolean  "admin",                  default: false
     t.string   "name"
     t.integer  "age"
-    t.boolean  "is_male"
-    t.boolean  "is_female"
     t.string   "gender"
-    t.boolean  "admin",                  default: false
-    t.string   "genderString"
     t.string   "role"
     t.string   "emailSecondary"
     t.string   "phoneNumber"
     t.string   "phoneNumberSecondary"
+    t.string   "company"
+    t.string   "project"
     t.string   "inputId"
     t.string   "specialty"
   end

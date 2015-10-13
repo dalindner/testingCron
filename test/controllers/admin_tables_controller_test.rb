@@ -18,7 +18,7 @@ class AdminTablesControllerTest < ActionController::TestCase
 
   test "should create admin_table" do
     assert_difference('AdminTable.count') do
-      post :create, admin_table: {  }
+      post :create, admin_table: { adminId: @admin_table.adminId, holderId: @admin_table.holderId }
     end
 
     assert_redirected_to admin_table_path(assigns(:admin_table))
@@ -35,7 +35,7 @@ class AdminTablesControllerTest < ActionController::TestCase
   end
 
   test "should update admin_table" do
-    patch :update, id: @admin_table, admin_table: {  }
+    patch :update, id: @admin_table, admin_table: { adminId: @admin_table.adminId, holderId: @admin_table.holderId }
     assert_redirected_to admin_table_path(assigns(:admin_table))
   end
 

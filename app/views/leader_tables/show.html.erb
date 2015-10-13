@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Leaderid:</strong>
+  <%= @leader_table.leaderId %>
+</p>
+
+<p>
+  <strong>Holderid:</strong>
+  <%= @leader_table.holderId %>
+</p>
+
 <%= link_to 'Edit', edit_leader_table_path(@leader_table) %> |
 <%= link_to 'Back', leader_tables_path %>

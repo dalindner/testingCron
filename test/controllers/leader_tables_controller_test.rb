@@ -18,7 +18,7 @@ class LeaderTablesControllerTest < ActionController::TestCase
 
   test "should create leader_table" do
     assert_difference('LeaderTable.count') do
-      post :create, leader_table: {  }
+      post :create, leader_table: { holderId: @leader_table.holderId, leaderId: @leader_table.leaderId }
     end
 
     assert_redirected_to leader_table_path(assigns(:leader_table))
@@ -35,7 +35,7 @@ class LeaderTablesControllerTest < ActionController::TestCase
   end
 
   test "should update leader_table" do
-    patch :update, id: @leader_table, leader_table: {  }
+    patch :update, id: @leader_table, leader_table: { holderId: @leader_table.holderId, leaderId: @leader_table.leaderId }
     assert_redirected_to leader_table_path(assigns(:leader_table))
   end
 
