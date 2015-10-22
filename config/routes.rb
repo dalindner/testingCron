@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  
+  resources :answer_requirement_qs
+
+  resources :requirement_qs
+
+  #get '/projects/:id/staffing', :controller => 'projects', :action => 'staffing'
+  resources :true_false_questions
+
+  resources :projects do
+    member do
+      get 'staffing', :action => 'staffing'
+      get 'questions', :action => 'questions'
+    end
+  end
+
+
+  resources :mult_choice_questions
+
   resources :admin_tables
 
   resources :leader_tables
@@ -9,13 +27,15 @@ Rails.application.routes.draw do
      get '/users/sign_out' => 'devise/sessions#destroy'     
   end
   
-  resources :questions
+
 
   get 'pages/about'
 
   get 'pages/contact'
 
   get 'pages/index'
+
+  get 'pages/test'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,73 @@
+<h1>Listing requirement_qs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question1</th>
+      <th>Score1p1</th>
+      <th>Score2p1</th>
+      <th>Score3p1</th>
+      <th>Score4p1</th>
+      <th>Score1p2</th>
+      <th>Score2p2</th>
+      <th>Score3p2</th>
+      <th>Score4p2</th>
+      <th>Score1p3</th>
+      <th>Score2p3</th>
+      <th>Score3p3</th>
+      <th>Score4p3</th>
+      <th>Score1p4</th>
+      <th>Score2p4</th>
+      <th>Score3p4</th>
+      <th>Score4p4</th>
+      <th>Score1p5</th>
+      <th>Score2p5</th>
+      <th>Score3p5</th>
+      <th>Score4p5</th>
+      <th>Score1p5</th>
+      <th>Score2p5</th>
+      <th>Score3p5</th>
+      <th>Score4p5</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requirement_qs.each do |requirement_q| %>
+      <tr>
+        <td><%= requirement_q.question1 %></td>
+        <td><%= requirement_q.score1P1 %></td>
+        <td><%= requirement_q.score2P1 %></td>
+        <td><%= requirement_q.score3P1 %></td>
+        <td><%= requirement_q.score4P1 %></td>
+        <td><%= requirement_q.score1P2 %></td>
+        <td><%= requirement_q.score2P2 %></td>
+        <td><%= requirement_q.score3P2 %></td>
+        <td><%= requirement_q.score4P2 %></td>
+        <td><%= requirement_q.score1P3 %></td>
+        <td><%= requirement_q.score2P3 %></td>
+        <td><%= requirement_q.score3P3 %></td>
+        <td><%= requirement_q.score4P3 %></td>
+        <td><%= requirement_q.score1P4 %></td>
+        <td><%= requirement_q.score2P4 %></td>
+        <td><%= requirement_q.score3P4 %></td>
+        <td><%= requirement_q.score4P4 %></td>
+        <td><%= requirement_q.score1P5 %></td>
+        <td><%= requirement_q.score2P5 %></td>
+        <td><%= requirement_q.score3P5 %></td>
+        <td><%= requirement_q.score4P5 %></td>
+        <td><%= requirement_q.score1P5 %></td>
+        <td><%= requirement_q.score2P5 %></td>
+        <td><%= requirement_q.score3P5 %></td>
+        <td><%= requirement_q.score4P5 %></td>
+        <td><%= link_to 'Show', requirement_q %></td>
+        <td><%= link_to 'Edit', edit_requirement_q_path(requirement_q) %></td>
+        <td><%= link_to 'Destroy', requirement_q, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Requirement q', new_requirement_q_path %>

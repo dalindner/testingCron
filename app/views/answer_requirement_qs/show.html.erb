@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Answer1:</strong>
+  <%= @answer_requirement_q.answer1 %>
+</p>
+
+<p>
+  <strong>Answer2:</strong>
+  <%= @answer_requirement_q.answer2 %>
+</p>
+
+<p>
+  <strong>Answer3:</strong>
+  <%= @answer_requirement_q.answer3 %>
+</p>
+
+<%= link_to 'Edit', edit_answer_requirement_q_path(@answer_requirement_q) %> |
+<%= link_to 'Back', answer_requirement_qs_path %>

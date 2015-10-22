@@ -1,0 +1,17 @@
+<%= form_for(@mult_choice_question) do |f| %>
+  <% if @mult_choice_question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mult_choice_question.errors.count, "error") %> prohibited this mult_choice_question from being saved:</h2>
+
+      <ul>
+      <% @mult_choice_question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

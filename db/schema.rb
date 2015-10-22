@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011234123) do
+ActiveRecord::Schema.define(version: 20151022012903) do
 
   create_table "admin_tables", force: true do |t|
     t.string   "adminId"
     t.string   "holderId"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "answer_requirement_qs", force: true do |t|
+    t.integer  "answer1"
+    t.integer  "answer2"
+    t.integer  "answer3"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "answers", force: true do |t|
+    t.integer  "answer1"
+    t.integer  "answer2"
+    t.integer  "answer3"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,12 +50,22 @@ ActiveRecord::Schema.define(version: 20151011234123) do
     t.datetime "updated_at"
   end
 
+  create_table "mult_choice_questions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "project_title"
     t.integer  "project_id"
     t.text     "description"
     t.string   "url"
     t.string   "creater_id"
+    t.integer  "answer1"
+    t.integer  "answer2"
+    t.integer  "answer3"
+    t.integer  "answer4"
+    t.integer  "answer5"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,9 +75,47 @@ ActiveRecord::Schema.define(version: 20151011234123) do
     t.integer "user_id"
   end
 
-  create_table "questions", force: true do |t|
-    t.text     "question"
-    t.string   "process"
+  create_table "requirement_qs", force: true do |t|
+    t.string   "question1"
+    t.integer  "score1P1"
+    t.integer  "score2P1"
+    t.integer  "score3P1"
+    t.integer  "score4P1"
+    t.integer  "score1P2"
+    t.integer  "score2P2"
+    t.integer  "score3P2"
+    t.integer  "score4P2"
+    t.integer  "score1P3"
+    t.integer  "score2P3"
+    t.integer  "score3P3"
+    t.integer  "score4P3"
+    t.integer  "score1P4"
+    t.integer  "score2P4"
+    t.integer  "score3P4"
+    t.integer  "score4P4"
+    t.integer  "score1P5"
+    t.integer  "score2P5"
+    t.integer  "score3P5"
+    t.integer  "score4P5"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "true_false_questions", force: true do |t|
+    t.string   "question"
+    t.integer  "answer"
+    t.integer  "YesP1"
+    t.integer  "YesP2"
+    t.integer  "YesP3"
+    t.integer  "YesP4"
+    t.integer  "YesP5"
+    t.integer  "YesP6"
+    t.integer  "NoP1"
+    t.integer  "NoP2"
+    t.integer  "NoP3"
+    t.integer  "NoP4"
+    t.integer  "NoP5"
+    t.integer  "NoP6"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

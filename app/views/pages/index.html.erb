@@ -5,7 +5,9 @@
 <% if user_signed_in? %>
     <% if current_user.role == "Team Member" %>
       <h1>You are a team member</h1>
-    <% elsif current_user.role == "Team Leader" %>
+    <% elsif current_user.role == "Leader" %>
+      <%= link_to 'New Project', new_project_path %>
+      
       <h1>You are a team leader</h1>
     <% elsif current_user.role == "Admin"%>
       <h1>You are an admin</h1>
@@ -20,3 +22,12 @@
 <%= link_to 'New Admin table', admin_tables_path %>
 </br>
 <%= link_to 'Edit Leader table', leader_tables_path %>
+
+<ul class="nav nav-tabs">
+  <li class='active'>
+    <%= link_to "questions", mult_choice_questions_path %>
+  </li>
+  <li>
+    <%= link_to "test", admin_tables_path %>
+  </li>
+</ul>

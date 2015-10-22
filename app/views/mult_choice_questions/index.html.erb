@@ -1,0 +1,23 @@
+<h1>Listing mult_choice_questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mult_choice_questions.each do |mult_choice_question| %>
+      <tr>
+        <td><%= link_to 'Show', mult_choice_question %></td>
+        <td><%= link_to 'Edit', edit_mult_choice_question_path(mult_choice_question) %></td>
+        <td><%= link_to 'Destroy', mult_choice_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mult choice question', new_mult_choice_question_path %>
