@@ -24,6 +24,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'devise'
 
+gem 'simple_form'
+
 gem 'devise_security_extension'
 
 gem 'rails_email_validator'

@@ -6,7 +6,7 @@
     <% if current_user.role == "Team Member" %>
       <h1>You are a team member</h1>
     <% elsif current_user.role == "Leader" %>
-      <%= link_to 'New Project', new_project_path %>
+      <%= link_to 'New Team', new_team_path %>
       
       <h1>You are a team leader</h1>
     <% elsif current_user.role == "Admin"%>
@@ -22,6 +22,40 @@
 <%= link_to 'New Admin table', admin_tables_path %>
 </br>
 <%= link_to 'Edit Leader table', leader_tables_path %>
+
+
+  
+
+<% if user_signed_in? %>  
+  <h2 class="text-center"> All available Teams </h2>
+  
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th> # </th>
+        <th> Title </th>
+        <th> Project Count </th>
+        <th> Last Update </th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% Team.all.each do |team| %>
+        <tr>
+          <td> # </td>
+          <td> <%= link_to(team.title, team_path(team)) %> </td> 
+          <td> <%= team.projects.size %> </td> 
+          <td> <%= team.updated_at %> </td> 
+           <% if current_user.is_member_of?(team) %>
+          <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :post, class: "btn btn-danger") %> </td>
+           <% else %>
+          <td> <%= link_to("Join Team", join_team_path(team.id), method: :post, class: "btn btn-info") %> </td>
+           <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
 
 <ul class="nav nav-tabs">
   <li class='active'>

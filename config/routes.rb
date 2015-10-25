@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
   
+  resources :teams do
+    resources :projects 
+      member do
+       get 'join', :action => 'join'
+       get 'quit', :action => 'quit'
+      end  
+  end
+  namespace :account do
+    resources :teams
+    resources :projects
+  end
+
   resources :answer_requirement_qs
 
   resources :requirement_qs
@@ -7,12 +19,14 @@ Rails.application.routes.draw do
   #get '/projects/:id/staffing', :controller => 'projects', :action => 'staffing'
   resources :true_false_questions
 
-  resources :projects do
-    member do
-      get 'staffing', :action => 'staffing'
-      get 'questions', :action => 'questions'
-    end
-  end
+  
+    
+  #resources :projects do
+  #  member do
+    #  get 'staffing', :action => 'staffing'
+   #   get 'questions', :action => 'questions'
+   # end
+ # end
 
 
   resources :mult_choice_questions

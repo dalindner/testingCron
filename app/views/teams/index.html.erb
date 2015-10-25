@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <div class="team">
+    <%= link_to("New team", new_team_path, class: "btn btn-primary pull-right") %>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Title</td>
+        <td>Team Description</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td>#</td>
+          <td><%= link_to(team.title, team_path(team)) %></td>
+          <td><%= team.team_description %></td>
+          <td>
+            <% if team.editable_by?(current_user) %>
+              <%= link_to("Edit", edit_team_path(team), class: "btn btn-sm btn-default")%>
+              <%= link_to("Delete", team_path(team), class: "btn btn-sm btn-default", method: :delete, data: { confirm: "Are you sure?" } )%>
+             <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

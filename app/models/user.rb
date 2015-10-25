@@ -11,7 +11,24 @@ class User < ActiveRecord::Base
   validates :phoneNumber, format: { with: /\d{10}/, allow_blank: false, message: "must be 10 digits" }
   validates :phoneNumberSecondary, format: { with: /\d{10}/, allow_blank: true, message: "must be 10 digits or blank" }
 
-  #has_and_belongs_to_many :projects
+  has_many :teams
+  has_many :projects
+
+  has_many :team_users
+  has_many :participated_teams, through: :team_users, source: :team
+  
+ def join!(team)
+   participated_teams << team
+ end
+
+ def quit!(team)
+   participated_teams.delete(team)
+ end
+
+  def is_member_of?(team)
+    participated_teams.include?(team)
+  end
+
   validate :specialtyCheck , :on=>:create
 
   def testAdmin

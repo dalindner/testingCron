@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <h2 class="text-center"> Projects I am working in</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Team </th>
+        <th> Last Update </th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.project_title %></td>
+          <td><%= project.description %></td>
+          <td><%= link_to(project.team.title, team_path(project.team))%></td>
+          <td><%= project.updated_at.to_s(:short) %></td>
+          <td><%= link_to('Edit', edit_team_project_path(project.team, project), class: "btn btn-info btn-xs") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

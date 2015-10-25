@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <div class="team">
+   <% if current_user.is_member_of?(@team) %>
+      <%= link_to("New Project", new_team_project_path(@team), class: "btn btn-warning pull-right") %>
+      <%= link_to("Edit Team", edit_team_path(@team), class: "btn btn-primary pull-right")%>
+   <% else %>   
+      <%= link_to("New Project", class: "btn btn-warning pull-right") %>
+      <%= link_to("Edit Team", class: "btn btn-primary pull-right")%>
+   <% end %>   
+   <% if current_user.present? %>
+     <% if current_user.is_member_of?(@team) %>
+       <%= link_to("Quit Team", quit_team_path(@team), method: :get, class: "btn btn-danger") %>
+     <% else %>
+       <%= link_to("Join Team", join_team_path(@team), method: :get, class: "btn btn-info") %>
+     <% end %>
+   <% end %>
+
+  </div>
+  <h2><%= @team.title %></h2>
+  <p><%= @team.team_description %></p>  
+  
+ <table class="table">
+   <thead>
+     <tr>
+       <th>Project</th>
+       <th colspan="2"></th>
+     </tr>
+   </thead>
+   <tbody>
+     <% @projects.each do |project| %>
+       <tr>
+        <% if current_user.is_member_of?(@team) %>
+          <td><%= link_to(project.project_title, team_project_path(project.team, project)) %></td>
+          <td><%= project.description %></td>
+          <td>  
+          <%= link_to("Edit", edit_team_project_path(project.team, project),
+                       class: "btn btn-default btn-xs")%>            
+          <%= link_to("Destroy", team_project_path(project.team, project), class: "btn btn-default btn-xs ", method: :delete, data: { confirm: "Are you sure?" } )%>
+          </td>  
+          <% else %>
+           <td><%= project.project_title %></td>
+          <td><%= project.description %></td>
+          <% end %>     
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
+</div>

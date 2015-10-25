@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022012903) do
+ActiveRecord::Schema.define(version: 20151024231129) do
 
   create_table "admin_tables", force: true do |t|
     t.string   "adminId"
@@ -21,14 +21,6 @@ ActiveRecord::Schema.define(version: 20151022012903) do
   end
 
   create_table "answer_requirement_qs", force: true do |t|
-    t.integer  "answer1"
-    t.integer  "answer2"
-    t.integer  "answer3"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "answers", force: true do |t|
     t.integer  "answer1"
     t.integer  "answer2"
     t.integer  "answer3"
@@ -57,10 +49,9 @@ ActiveRecord::Schema.define(version: 20151022012903) do
 
   create_table "projects", force: true do |t|
     t.string   "project_title"
-    t.integer  "project_id"
     t.text     "description"
-    t.string   "url"
-    t.string   "creater_id"
+    t.integer  "user_id"
+    t.integer  "team_id"
     t.integer  "answer1"
     t.integer  "answer2"
     t.integer  "answer3"
@@ -99,6 +90,22 @@ ActiveRecord::Schema.define(version: 20151022012903) do
     t.integer  "score4P5"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "team_users", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string   "title"
+    t.text     "team_description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "projects_count",   default: 0
   end
 
   create_table "true_false_questions", force: true do |t|
