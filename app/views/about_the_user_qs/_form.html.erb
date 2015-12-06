@@ -1,0 +1,135 @@
+
+  <%= form_for(@about_the_user_q) do |f| %>
+  <% if @about_the_user_q.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@about_the_user_q.errors.count, "error") %> prohibited this about_the_user_q from being saved:</h2>
+
+      <ul>
+      <% @about_the_user_q.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :question %><br>
+    <%= f.text_field :question %>
+  </div>
+  <div class="field">
+    <%= f.label :prompt1 %><br>
+    <%= f.text_field :prompt1 %>
+  </div>
+  <div class="field">
+    <%= f.label :prompt2 %><br>
+    <%= f.text_field :prompt2 %>
+  </div>
+  <div class="field">
+    <%= f.label :prompt3 %><br>
+    <%= f.text_field :prompt3 %>
+  </div>
+  <div class="field">
+    <%= f.label :prompt4 %><br>
+    <%= f.text_field :prompt4 %>
+  </div>
+  <div class="field">
+    <%= f.label :score1P1 %><br>
+    <%= f.number_field :score1P1 %>
+  </div>
+  <div class="field">
+    <%= f.label :score2P1 %><br>
+    <%= f.number_field :score2P1 %>
+  </div>
+  <div class="field">
+    <%= f.label :score3P1 %><br>
+    <%= f.number_field :score3P1 %>
+  </div>
+  <div class="field">
+    <%= f.label :score4P1 %><br>
+    <%= f.number_field :score4P1 %>
+  </div>
+  <div class="field">
+    <%= f.label :score1P2 %><br>
+    <%= f.number_field :score1P2 %>
+  </div>
+  <div class="field">
+    <%= f.label :score2P2 %><br>
+    <%= f.number_field :score2P2 %>
+  </div>
+  <div class="field">
+    <%= f.label :score3P2 %><br>
+    <%= f.number_field :score3P2 %>
+  </div>
+  <div class="field">
+    <%= f.label :score4P2 %><br>
+    <%= f.number_field :score4P2 %>
+  </div>
+  <div class="field">
+    <%= f.label :score1P3 %><br>
+    <%= f.number_field :score1P3 %>
+  </div>
+  <div class="field">
+    <%= f.label :score2P3 %><br>
+    <%= f.number_field :score2P3 %>
+  </div>
+  <div class="field">
+    <%= f.label :score3P3 %><br>
+    <%= f.number_field :score3P3 %>
+  </div>
+  <div class="field">
+    <%= f.label :score4P3 %><br>
+    <%= f.number_field :score4P3 %>
+  </div>
+  <div class="field">
+    <%= f.label :score1P4 %><br>
+    <%= f.number_field :score1P4 %>
+  </div>
+  <div class="field">
+    <%= f.label :score2P4 %><br>
+    <%= f.number_field :score2P4 %>
+  </div>
+  <div class="field">
+    <%= f.label :score3P4 %><br>
+    <%= f.number_field :score3P4 %>
+  </div>
+  <div class="field">
+    <%= f.label :score4P4 %><br>
+    <%= f.number_field :score4P4 %>
+  </div>
+  <div class="field">
+    <%= f.label :score1P5 %><br>
+    <%= f.number_field :score1P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score2P5 %><br>
+    <%= f.number_field :score2P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score3P5 %><br>
+    <%= f.number_field :score3P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score4P5 %><br>
+    <%= f.number_field :score4P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score1P5 %><br>
+    <%= f.number_field :score1P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score2P5 %><br>
+    <%= f.number_field :score2P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score3P5 %><br>
+    <%= f.number_field :score3P5 %>
+  </div>
+  <div class="field">
+    <%= f.label :score4P5 %><br>
+    <%= f.number_field :score4P5 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

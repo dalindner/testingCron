@@ -19,7 +19,6 @@
           <td>
             <% if team.editable_by?(current_user) %>
               <%= link_to("Edit", edit_team_path(team), class: "btn btn-sm btn-default")%>
-              <%= link_to("Delete", team_path(team), class: "btn btn-sm btn-default", method: :delete, data: { confirm: "Are you sure?" } )%>
              <% end %>
           </td>
         </tr>

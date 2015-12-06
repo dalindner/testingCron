@@ -1,0 +1,2 @@
+module RiskQsHelper
+end

@@ -1,0 +1,27 @@
+
+<div class="col-md-12">
+  <div class="project">
+    
+  
+  <div id="Project Title: ">
+  	<h2> Project Title </h2>
+    <p><%= @project.project_title %></p>
+  </div>
+
+   <div id="Description">
+   	 <h2> Project Description </h2> 
+   	 <p><%= @project.description %></p>
+   </div>
+
+  <div id="Process Model n">
+     <h2> Process Model </h2> 
+     <p><%= @project.process_model %></p>
+   </div>
+
+   <br>
+   <br>
+   <td><%= link_to 'Done', team_path(@project.team) , class: "btn btn-primary"%></td>
+</div>
+</div>
+
+

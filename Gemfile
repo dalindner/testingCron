@@ -30,6 +30,8 @@ gem 'devise_security_extension'
 
 gem 'rails_email_validator'
 
+gem "simple_calendar", "~> 2.0"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -53,3 +55,11 @@ end
 group :development, :test do
 	gem 'sqlite3'
 end
+
+group :test, :development do
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+end
+
+gem 'webrat', '~> 0.7.3'

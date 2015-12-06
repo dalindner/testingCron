@@ -1,0 +1,58 @@
+<%= simple_form_for(@scheduling) do |f| %>
+  <%= f.error_notification %>
+
+  	<% @time = "time#{@num}" %>
+    <% @type = "type#{@num}" %>
+    <% @description = "description#{@num}" %>
+    <% @priority = "priority#{@num}" %>
+
+  	<br>  
+    <em>*</em>
+    <%= f.label "Description" %>
+    <br>
+    <%= f.text_area @description.to_sym  %>
+    <br>
+    <br>
+    <em>*</em>
+    <%= f.label "Type of Entry" %>
+    <br>
+    <%= f.select(@type.to_sym, options_for_select([['Documentation','Documentation'] , ['Design','Design'], ['Implementation','Implementation'] , ['Verification','Verification'], ['Deliverable','Deliverable']], selected: Scheduling.where(:id => @scheduling.id).pluck(@type).first))  %>
+    <br>
+    <br>
+    <em>*</em>
+    <%= f.label "Priority" %>
+    <br>
+    <%= f.select(@priority.to_sym, options_for_select([['High','High'] , ['Medium','Medium'], ['Low','Low']], selected: Scheduling.where(:id => @scheduling.id).pluck(@priority).first))  %>
+    <br>
+    <br>
+    <%= f.label "Date" %>
+    <br>
+
+    <meta charset="utf-8">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+    $(function() {
+      $( "#time" ).datepicker();
+
+    });
+    </script>
+   
+      <%= f.text_field @time.to_sym,:id=>"time" %>
+      <br>
+      <br>
+      <br>
+
+    </script>
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
+    <br>
+    <br>
+
+    <%= link_to("Delete Entry", "http://localhost:3000/schedulings/#{@scheduling.id}/clear/#{@num}", method: :get, class: "btn btn-danger", data: { confirm: "Are you sure?"}) %>
+  
+<% end %>

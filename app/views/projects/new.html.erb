@@ -1,12 +1,15 @@
 <h1 class="text-center">New Projects</h1>
 
 <div class="col-md-4 col-md-offset-4">
-  <%= simple_form_for [@team,@project] do |f| %>
+  <%= simple_form_for [@team, @project] do |f| %>
     <div class="form-team">
+    	<br>
       <%= f.input :project_title, input_html: { class: "form-control"} %>
+      <br>
       <%= f.input :description, input_html: { class: "form-control"} %>
     </div>
     <div class="form-actions">
+    	<br>
       <%= f.submit "Submit", disable_with: "Submiting...", class: "btn btn-primary"%>
     </div>
   <% end %>

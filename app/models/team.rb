@@ -4,8 +4,8 @@ class Team < ActiveRecord::Base
 	has_many :projects, dependent: :destroy
 	has_many :team_users
     has_many :members, through: :team_users, source: :user
-
-	belongs_to :leader, class_name: "User", foreign_key: :user_id
+    #has_and_belongs_to_many :users
+	#belongs_to :leader, class_name: "User", foreign_key: :user_id
 
   	def editable_by?(user)
     	user && user == leader

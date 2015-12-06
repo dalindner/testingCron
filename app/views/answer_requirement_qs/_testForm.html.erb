@@ -1,0 +1,129 @@
+<%= form_for(@answer_requirement_q) do |f| %>
+  <% if @answer_requirement_q.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@answer_requirement_q.errors.count, "error") %> prohibited this answer_requirement_q from being saved:</h2>
+
+      <ul>
+      <% @answer_requirement_q.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br>
+  <br>
+  <% @i = RequirementQ.count %>
+  <% for h in 1..@i %>
+    <strong>Question <%=h%></strong>
+    <br>
+    <%= RequirementQ.where(:id => h).pluck(:question).first %>
+    <br/>
+    <% @prompt1 = RequirementQ.where(:id => h).pluck(:prompt1).first %>
+    <% @prompt2 = RequirementQ.where(:id => h).pluck(:prompt2).first %>
+    <% @prompt3 = RequirementQ.where(:id => h).pluck(:prompt3).first %>
+    <% @prompt4 = RequirementQ.where(:id => h).pluck(:prompt4).first %>
+    <% if(@prompt1 != "" || @prompt1 != "" || @prompt1 != "" || @prompt1 != "") %>
+      <% if(@prompt1 != "") %>
+        <p>1=> <%= @prompt1 %></p>
+      <%end%>
+      <% if(@prompt2 != "") %>
+        <p>2=> <%= @prompt2 %></p>
+      <%end%>
+      <% if(@prompt3 != "") %>
+        <p>3=> <%= @prompt3 %></p>
+      <%end%>
+      <% if(@prompt4 != "") %>
+        <p>4=> <%= @prompt4 %></p>
+      <%end%>
+
+      <% @answerTemp = "answer#{h}" %>
+      <div class="field">
+        <%= f.number_field @answerTemp.to_sym, :in => 1..4, :step => 1 %>
+      </div>
+      <hr size=4 width="50%">
+    <%else%>
+      <% @answerTemp = "answer#{h}" %>
+      <% if(AnswerRequirementQ.where(:id => @answer_requirement_q.id).pluck(@answerTemp).first == 1) %>
+        <div class="field">
+          <%= f.select(@answerTemp.to_sym, options_for_select([['True',1], ['False', 2]])) %>
+        </div>
+      <% elsif(AnswerRequirementQ.where(:id => @answer_requirement_q.id).pluck(@answerTemp).first == 2) %>
+        <div class="field">
+          <%= f.select(@answerTemp.to_sym, options_for_select([['False',2], ['True', 1]])) %>
+        </div>
+      <% else %>
+        <div class="field">
+          <%= f.select(@answerTemp.to_sym, options_for_select([['True',1], ['False', 2]]), :include_blank => true) %>
+        </div>
+      <%end%>
+      <hr size=4 width="50%">
+    <%end%>
+  <%end%>
+
+  <div class="actions">
+    <%= f.submit "Update Answers", class: "btn btn-primary"%>
+  </div>
+
+<% @runningTotalT1 = 0 %>
+<% @runningTotalT2 = 0 %>
+<% @runningTotalT3 = 0 %>
+<% @runningTotalT4 = 0 %>
+<% @runningTotalT5 = 0 %>
+<% @runningTotalT6 = 0 %>
+
+<% @test = @answer_requirement_q %>
+<% @c = AnswerRequirementQ.columns.map {|c| c.name } %>
+<% for j in 2..@c.size-4 %>
+  <% @answer = AnswerRequirementQ.where(:id => @test.id).pluck(@c[j]).first %>
+  <% @index = j-2 %>
+  <% if(@answer != nil) %>
+    <% for k in 1..6 %>
+      <% if(@answer != nil) %>
+        <% "score#{@answer}P#{k}" %>
+        <% @score = RequirementQ.where(:id => j-1).pluck("score#{@answer}P#{k}").first %>
+        <% if(@score != nil) %>
+          <% if(k == 1) %>
+            <% @runningTotalT1 += @score %>
+          <%end%>
+          <% if(k == 2) %>
+            <% @runningTotalT2 += @score %>
+          <%end%>
+          <% if(k == 3) %>
+            <% @runningTotalT3 += @score %>
+          <%end%>
+          <% if(k == 4) %>
+            <% @runningTotalT4 += @score %>
+          <%end%>
+          <% if(k == 5) %>
+            <% @runningTotalT5 += @score %>
+          <%end%>
+          <% if(k == 6) %>
+            <% @runningTotalT5 += @score %>
+          <%end%>
+        <%end%>
+      <%end%>
+    <%end%>
+  <%end%>
+<%end%>
+
+<% @runningTotalT1 %>
+<% @runningTotalT2 %>
+<% @runningTotalT3 %>
+<% @runningTotalT4 %>
+<% @runningTotalT5 %>
+<% @runningTotalT6 %>
+
+<% @max = [@runningTotalT1, @runningTotalT2, @runningTotalT3, @runningTotalT4, @runningTotalT5, @runningTotalT6].max %>
+<% if(@max == @runningTotalT1) %>
+<% elsif(@max == @runningTotalT2) %>
+<% elsif(@max == @runningTotalT3) %>
+<% elsif(@max == @runningTotalT4) %>
+<% elsif(@max == @runningTotalT5) %>
+<% elsif(@max == @runningTotalT6) %>
+<%end%>
+
+
+
+
+<% end %>

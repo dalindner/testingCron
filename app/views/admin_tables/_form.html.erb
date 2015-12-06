@@ -13,13 +13,11 @@
 
   <div class="field">
     <%= f.label :adminId %><br>
-    <%= f.text_field :adminId %>
+    <%= f.text_field :adminId, class: "form-control"%>
   </div>
-  <div class="field">
-    <%= f.label :holderId %><br>
-    <%= f.text_field :holderId %>
-  </div>
+  <br>
+  <br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>

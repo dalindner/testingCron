@@ -1,7 +1,11 @@
 class CreateRequirementQs < ActiveRecord::Migration
   def change
     create_table :requirement_qs do |t|
-      t.string :question1
+      t.string :question
+      t.string :prompt1
+      t.string :prompt2
+      t.string :prompt3
+      t.string :prompt4
       t.integer :score1P1
       t.integer :score2P1
       t.integer :score3P1
@@ -26,6 +30,10 @@ class CreateRequirementQs < ActiveRecord::Migration
       t.integer :score2P5
       t.integer :score3P5
       t.integer :score4P5
+      t.integer :score1P6
+      t.integer :score2P6
+      t.integer :score3P6
+      t.integer :score4P6
 
       t.timestamps
     end

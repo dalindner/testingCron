@@ -1,0 +1,77 @@
+<div class="col-md-4 col-md-offset-4">
+  <h2>New User</h2>
+
+  <%= form_for @user do |f| %>
+	
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Company" %><br />
+    <%= f.text_field :company, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "User ID " %>
+    <em>(Required if Team Leader or Admin Role)</em><br />
+    <%= f.text_field :inputId, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Name" %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Age" %> <%= f.select :age, ((0..100).map {|i| [i,i] }) %>
+    <em>*</em>
+    <%= f.label "Gender" %> <%= f.select(:gender, options_for_select([['Male','Male'], ['Female', 'Female']])) %>
+    <em>*</em>
+    <%= f.label "Role" %> <%= f.select(:role, options_for_select([['Team Member','Team Member'], ['Team Leader', 'Leader'], ['Admin']])) %>
+    <em>*</em>
+    <%= f.label "Specialty" %> <%= f.select(:specialty, options_for_select([['Select One','Select One'] , ['Member - Software Developer','Member - Software Developer'], ['Member - Tester','Member - Tester'] , ['Member - Designer','Member - Designer'], ['Member - HR','Member - HR'], ['Member - Systems','Member - Systems'], ['Member - Hardware','Member - Hardware'], ['Team Leader', 'Team Leader'], ['Admin']]))  %>
+  </div>
+
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Primary Phone Number" %><br />
+    <%= f.text_field :phoneNumber, autofocus: false, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Secondary Phone Number" %><br />
+    <%= f.text_field :phoneNumberSecondary, autofocus: false, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Primary Email" %><br />
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Secondary Email" %><br />
+    <%= f.email_field :emailSecondary, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Password" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <em>*</em>
+    <%= f.label "Password Confirmation" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create new user", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+</div>

@@ -1,0 +1,2 @@
+module AnswerAboutTheProductQsHelper
+end

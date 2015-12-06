@@ -5,9 +5,7 @@
 <% if user_signed_in? %>
     <% if current_user.role == "Team Member" %>
       <h1>You are a team member</h1>
-    <% elsif current_user.role == "Leader" %>
-      <%= link_to 'New Team', new_team_path %>
-      
+    <% elsif current_user.role == "Leader" %>      
       <h1>You are a team leader</h1>
     <% elsif current_user.role == "Admin"%>
       <h1>You are an admin</h1>
@@ -17,51 +15,133 @@
 <% else %>
   <h1>You are not signed in</h1>
 <% end %>
-
-
-<%= link_to 'New Admin table', admin_tables_path %>
-</br>
-<%= link_to 'Edit Leader table', leader_tables_path %>
-
-
   
-
 <% if user_signed_in? %>  
-  <h2 class="text-center"> All available Teams </h2>
-  
+     <% if current_user.role == "Admin"%> 
+            <tbody>
+                <tr>
+                  <%= link_to 'Create a New Team', new_team_path, class: "btn btn-primary pull-right" %>  
+                  <% link_to 'Edit IDs allowed to sign up as leaders', leader_tables_path, class: "btn btn-default" %>
+                  <% link_to 'Edit IDs allowed to sign up as admins', admin_tables_path, class: "btn btn-default" %>
+                  <br>   
+                  <br>     
+            </tbody>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th> # </th>
-        <th> Title </th>
-        <th> Project Count </th>
-        <th> Last Update </th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% Team.all.each do |team| %>
-        <tr>
-          <td> # </td>
-          <td> <%= link_to(team.title, team_path(team)) %> </td> 
-          <td> <%= team.projects.size %> </td> 
-          <td> <%= team.updated_at %> </td> 
-           <% if current_user.is_member_of?(team) %>
-          <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :post, class: "btn btn-danger") %> </td>
-           <% else %>
-          <td> <%= link_to("Join Team", join_team_path(team.id), method: :post, class: "btn btn-info") %> </td>
-           <% end %>
-      <% end %>
-    </tbody>
-  </table>
+                  <h2 class="text-center"> All Teams </h2>      
+
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th> TeamNo. </th>
+                        <th> Title </th>
+                        <th> Project Count </th>
+                        <th> Last Update </th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <% Team.all.each do |team| %>
+                        <tr>
+                          <td> <%= team.id %> </td>
+                          <td> <%= link_to(team.title, team_path(team), class: "btn btn-default btn-xs") %> </td> 
+                          <td> <%= team.projects.size %> </td> 
+                          <td> <%= team.updated_at %> </td> 
+                           <% if current_user.is_member_of?(team) %>
+                          <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
+                           <% else %>
+                            <% if current_user.participated_teams.size == 0 %>
+                              <td> <%= link_to("Join Team", join_team_path(team.id), method: :get, class: "btn btn-info btn-xs") %> </td>
+                            <%end%>
+                          <% end %>
+                          <td> <%= link_to("Edit team", edit_team_path(team), class: "btn btn-info btn-xs") %> </td> 
+                      <% end %>
+                    </tbody>
+                  </table>
+                        <br>
+                        <br>
+                        <h2 class="text-center"> All Users </h2>
+                        <table class="table">
+                        <thead>
+                          <tr>
+                            <th> # </th>
+                            <th> Name </th>
+                            <th> Last Update </th>
+                            <th> In any Team? </th>
+                            <th colspan="1"></th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                          <% User.all.each do |user| %>
+                            <tr>
+                              <td> # </td>
+                              <td> <%= user.name %> </td> 
+                              <td> <%= user.updated_at %> </td>
+                              <% if user.inteam == true %>
+                                    <td> <%= user.participated_teams.first.id %> </td> 
+                              <% else %> 
+                                     <td> Not in any team </td>
+                              <% end %> 
+                              <% if (user.inteam == true) %> 
+                                  <% @teamaa= user.participated_teams %>
+                                  <td> <%= link_to("Move out From Current Team", "http://localhost:3000/teams/#{@teamaa.first.id}/remove/#{user.id}", method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
+                              <% else %> 
+                                  <td> <%= link_to("Create Team", new_team_path, class: "btn btn-info btn-xs") %></td>
+                            <% end %>
+                        <% end %>
+                        </tbody>
+                        </table>
+    <% else %>
+                      <h2 class="text-center"> My team </h2>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th> TeamNo </th>
+                              <th> Title </th>
+                              <th> Project Count</th>
+                              <th> Last Update </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <% current_user.participated_teams.each do |team| %>
+                            <tr>
+                            <td> <%= team.id %> </td>
+                            <td> <%= link_to(team.title, team_path(team), class: "btn btn-default btn-xs") %> </td> 
+                            <td> <%= team.projects.size %> </td> 
+                            <td> <%= team.updated_at %> </td> 
+                            <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
+                          <% end %> 
+                          </tbody>
+                        </table>
+                  <h2 class="text-center"> All teams </h2>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th> TeamNo. </th>
+                        <th> Title </th>
+                        <th> Project Count </th>
+                        <th> Last Update </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% Team.all.each do |team| %>
+                        <tr>
+                          <td> <%= team.id %> </td>
+                          <td> <%= link_to(team.title, team_path(team), class: "btn btn-default btn-xs") %> </td> 
+                          <td> <%= team.projects.size %> </td> 
+                          <td> <%= team.updated_at %> </td> 
+                           <% if current_user.is_member_of?(team) %>
+                            <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
+                           <% else %>
+                            <% if current_user.participated_teams.size == 0 %>
+                              <td> <%= link_to("Join Team", join_team_path(team.id), method: :get, class: "btn btn-info btn-xs") %> </td>
+                            <% end %>
+                          <% end %>
+                      <% end %>
+                    </tbody>
+                  </table>
+
+    <%end%>
+
+
 <%end%>
-
-<ul class="nav nav-tabs">
-  <li class='active'>
-    <%= link_to "questions", mult_choice_questions_path %>
-  </li>
-  <li>
-    <%= link_to "test", admin_tables_path %>
-  </li>
-</ul>

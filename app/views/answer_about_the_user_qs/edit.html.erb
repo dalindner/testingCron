@@ -1,0 +1,40 @@
+<ul class="nav nav-tabs">
+  <li>
+    <%= link_to "Home", questions_project_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "Requirement Questions", edit_answer_requirement_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "Cost Questions", edit_answer_cost_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "AboutTheClient Questions", edit_answer_about_the_client_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li class='active'>
+    <%= link_to "AboutTheUser Questions", edit_answer_about_the_user_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "AboutTheTeam Questions", edit_answer_about_the_team_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "AboutTheProduct Questions", edit_answer_about_the_product_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "AboutTheProject Questions", edit_answer_about_the_project_q_path(@answer_about_the_user_q.id) %>
+  </li>
+  <li>
+    <%= link_to "Risk Questions", edit_answer_risk_q_path(@answer_about_the_user_q.id) %>
+  </li>
+    <li>
+    <%= link_to "Location Questions", edit_answer_location_q_path(@answer_about_the_user_q.id) %>
+  </li>
+    <li>
+    <%= link_to "Schedule Questions", edit_answer_schedule_q_path(@answer_about_the_user_q.id) %>
+  </li>
+    <li>
+    <%= link_to "Tool Questions", edit_answer_tool_q_path(@answer_about_the_user_q.id) %>
+  </li>
+</ul>
+
+<%= render 'testForm' %>

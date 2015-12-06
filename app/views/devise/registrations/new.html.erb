@@ -10,8 +10,8 @@
   </div>
 
   <div class="form-group">
+    <em>*</em>
     <%= f.label "User ID " %>
-    <em>(Required if Team Leader or Admin Role)</em><br />
     <%= f.text_field :inputId, autofocus: true, class: "form-control" %>
   </div>
 
@@ -58,7 +58,7 @@
     <em>*</em>
     <%= f.label "Password" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> characters minimum, lower-case required, upper-case required, and numeral required)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
   </div>

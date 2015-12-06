@@ -1,0 +1,641 @@
+<%= simple_form_for(@scheduling) do |f| %>
+  <%= f.error_notification %>
+
+  <% @startTemp == "" %>
+  <% @endTemp == "" %>
+  <% state = 0 %>
+  <% if(@scheduling.startDate == nil || @scheduling.startDate == "" || @scheduling.endDate == nil || @scheduling.endDate == "") %>
+    <% state = 0 %>
+
+  <% else %>
+
+    <% @startTemp = @scheduling.startDate %>
+    <% @arrayStart = @startTemp.split('/') %>
+    <% @startString = "#{@arrayStart[2]}-#{@arrayStart[0]}-#{@arrayStart[1]}" %>
+    <% @startTemp = Date.parse(@startString) %>
+
+    <% @endTemp = @scheduling.endDate %>
+    <% @arrayEnd = @endTemp.split('/') %>
+    <% @endString = "#{@arrayEnd[2]}-#{@arrayEnd[0]}-#{@arrayEnd[1]}" %>
+    <% @endTemp = Date.parse(@endString) %>
+
+    <% if(@startTemp >= @endTemp) %>
+      <% state = 1 %>
+    <% else %>
+      <% state = 2 %>
+    <%end%>
+  <%end%>
+
+  <% if(state == 0 || state == 1) %>
+    <br>
+    <h2>Valid Start And End Date Must Be Set</h2>
+
+    <em>*</em>
+    <%= f.label "Start Date" %>
+    <br>
+
+    <meta charset="utf-8">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+      $(function() {
+        $( "#start" ).datepicker();
+
+      });
+    </script>
+    <%= f.text_field :startDate,:id=>"start" %>
+    <br>
+    <br>
+
+    <em>*</em>
+    <%= f.label "End Date" %>
+    <br>
+    <meta charset="utf-8">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+      $(function() {
+        $( "#end" ).datepicker();
+
+      });
+    </script>
+   
+    <%= f.text_field :endDate,:id=>"end" %>
+
+    <br>
+    <br>
+
+
+  <% else%>
+
+    <br>
+    <br>
+    <%= link_to("Change Start/End Dates", "http://localhost:3000/schedulings/#{@scheduling.id}/changeDates", method: :get, class: "btn btn-primary") %>
+
+    <br>
+    <br>
+    <% @foundEntry = false %>
+    <% @foundReset = 0 %>
+    <% @counter = 1 %>
+
+    <% while(@foundEntry == false && @counter < 75) %>
+      <% @typeTemp = "type#{@counter}" %>
+      <% @tempReading = Scheduling.where(:id => @scheduling.id).pluck(@typeTemp).first %>
+      <% if(@tempReading == "reset") %>
+        <% if(@foundReset == 0) %>
+          <% @foundReset = @counter %>
+        <%end%>
+      <%end%>
+      <% if((@tempReading == nil)||(@tempReading == "")) %>
+          <% @foundEntry = true %>
+      <%end%>
+      <% @counter = @counter + 1 %>
+    <%end%>
+    <% @entry = @counter - 1%>
+
+    <% if(@foundReset != 0) %>
+      <% @time = "time#{@foundReset}" %>
+      <% @type = "type#{@foundReset}" %>
+      <% @description = "description#{@foundReset}" %>
+      <% @priority = "priority#{@foundReset}" %>
+      <% @timetime = "time#{@foundReset - 1}" %>
+    <% else %>
+      <% @time = "time#{@entry}" %>
+      <% @type = "type#{@entry}" %>
+      <% @description = "description#{@entry}" %>
+      <% @priority = "priority#{@entry}" %>
+      <% @timetime = "time#{@entry - 1}" %>
+    <% end %>
+
+    <% @c = Scheduling.columns.map {|c| c.name } %>
+    <% @c.size %>
+
+    <% @mapping = Hash.new%>
+    <% for i in 1..(@entry-1)*6%>
+      <% @c[i] %>
+      <% @mapping.store(@c[i], Scheduling.where(:id => @scheduling.id).pluck(@c[i]).first) %>
+    <%end%>
+    <% for i in 451..451+@entry-2%>
+      <% @c[i] %>
+      <% @mapping.store(@c[i], Scheduling.where(:id => @scheduling.id).pluck(@c[i]).first) %>
+    <%end%>
+
+
+
+
+
+    <% @ary = Array.new %>
+    <% @temp2 = 1 %>
+    <% while(@temp2 < @entry)%>
+    
+      <% @tempString = "time#{@temp2}" %>
+      <% if(@mapping[@tempString] == nil || @mapping[@tempString] == "") %>
+        <% @ary << @temp2 %>
+      <%end%>
+      <% @temp2 = @temp2 +1 %>
+
+    <%end%>
+    <% @ary %>
+
+
+
+
+
+
+
+  <% @tempModel = Project.where(:id => @scheduling.id).pluck("process_model").first %>
+
+  <% @dateTemp2 = @scheduling.startDate %>
+  <% @dateTemp3 = @scheduling.endDate %>
+  <% @array2 = @dateTemp2.split('/') %>
+  <% @array3 = @dateTemp3.split('/') %>
+  <% @dateString2= "#{@array2[2]}-#{@array2[0]}-#{@array2[1]}" %>
+  <% @dateString3= "#{@array3[2]}-#{@array3[0]}-#{@array3[1]}" %>
+  <% @dateTemp2 = Date.parse(@dateString2) %>
+  <% @dateTemp3 = Date.parse(@dateString3) %>
+  <% @days = (@dateTemp3 - @dateTemp2).to_i %>
+  <% @weeks = @days / 7 %>
+
+  <% @weeks %>
+
+
+  <% @numType1 = 0 %>
+  <% @numType2 = 0 %>
+  <% @numType3 = 0 %>
+  <% @numType4 = 0 %>
+  <% @numType5 = 0 %>
+  <% @type1High = Array.new %>
+  <% @type1Medium = Array.new %>
+  <% @type1Low = Array.new %>
+  <% @type2High = Array.new %>
+  <% @type2Medium = Array.new %>
+  <% @type2Low = Array.new %>
+  <% @type3High = Array.new %>
+  <% @type3Medium = Array.new %>
+  <% @type3Low = Array.new %>
+  <% @type4High = Array.new %>
+  <% @type4Medium = Array.new %>
+  <% @type4Low = Array.new %>
+  <% @type5High = Array.new %>
+  <% @type5Medium = Array.new %>
+  <% @type5Low = Array.new %>
+
+  <% for i in 0..@ary.size-1%>
+    <% @tempTy = "type#{@ary[i]}" %>
+    <% @tempPri = "priority#{@ary[i]}" %>
+    <% if(@mapping[@tempTy] == "Documentation") %>
+      <% @numType1 = @numType1 + 1 %>
+      <% if(@mapping[@tempPri] == "High") %>
+        <% @type1High << @ary[i] %>
+      <% elsif(@mapping[@tempPri] == "Medium") %>
+        <% @type1Medium << @ary[i] %>
+      <% else %>
+        <% @type1Low << @ary[i] %>
+      <%end%>
+    <%elsif(@mapping[@tempTy] == "Design")%>
+      <% @numType2 = @numType2 + 1 %>
+      <% if(@mapping[@tempPri] == "High") %>
+        <% @type2High << @ary[i] %>
+      <% elsif(@mapping[@tempPri] == "Medium") %>
+        <% @type2Medium << @ary[i] %>
+      <% else %>
+        <% @type2Low << @ary[i] %>
+      <%end%>
+    <%elsif(@mapping[@tempTy] == "Implementation")%>
+      <% @numType3 = @numType3 + 1 %>
+      <% if(@mapping[@tempPri] == "High") %>
+        <% @type3High << @ary[i] %>
+      <% elsif(@mapping[@tempPri] == "Medium") %>
+        <% @type3Medium << @ary[i] %>
+      <% else %>
+        <% @type3Low << @ary[i] %>
+      <%end%>
+    <%elsif(@mapping[@tempTy] == "Verification")%>
+      <% @numType4 = @numType4 + 1 %>
+      <% if(@mapping[@tempPri] == "High") %>
+        <% @type4High << @ary[i] %>
+      <% elsif(@mapping[@tempPri] == "Medium") %>
+        <% @type4Medium << @ary[i] %>
+      <% else %>
+        <% @type4Low << @ary[i] %>
+      <%end%>
+    <%elsif(@mapping[@tempTy] == "Deliverable")%>
+      <% @numType5 = @numType5 + 1 %>
+      <% if(@mapping[@tempPri] == "High") %>
+        <% @type5High << @ary[i] %>
+      <% elsif(@mapping[@tempPri] == "Medium") %>
+        <% @type5Medium << @ary[i] %>
+      <% else %>
+        <% @type5Low << @ary[i] %>
+      <%end%>
+    <%end%>
+  <%end%>
+  <br>
+
+  <% @type1High  %>
+  <% @type1Medium  %>
+  <% @type1Low %>
+  <% @type2High  %>
+  <% @type2Medium  %>
+  <% @type2Low %>
+  <% @type3High  %>
+  <% @type3Medium  %>
+  <% @type3Low %>
+  <% @type4High  %>
+  <% @type4Medium  %>
+  <% @type4Low  %>
+  <% @type5High  %>
+  <% @type5Medium  %>
+  <% @type5Low  %>
+
+
+
+
+
+
+
+
+
+
+<% @orderedType1 = Array.new %>
+  <% @orderedType2 = Array.new %>
+  <% @orderedType3 = Array.new %>
+  <% @orderedType4 = Array.new %>
+  <% @orderedType5 = Array.new %>
+
+  <% for i in 1..@type1High.size %>
+     <% @orderedType1.push(@type1High.shift()) %>
+  <%end%>
+  <% for i in 1..@type1Medium.size %>
+     <% @orderedType1.push(@type1Medium.shift()) %>
+  <%end%>
+  <% for i in 1..@type1Low.size %>
+     <% @orderedType1.push(@type1Low.shift()) %>
+  <%end%>
+  <% for i in 1..@type2High.size %>
+     <% @orderedType2.push(@type2High.shift()) %>
+  <%end%>
+  <% for i in 1..@type2Medium.size %>
+     <% @orderedType2.push(@type2Medium.shift()) %>
+  <%end%>
+  <% for i in 1..@type2Low.size %>
+     <% @orderedType2.push(@type2Low.shift()) %>
+  <%end%>
+  <% for i in 1..@type3High.size %>
+     <% @orderedType3.push(@type3High.shift()) %>
+  <%end%>
+  <% for i in 1..@type3Medium.size %>
+     <% @orderedType3.push(@type3Medium.shift()) %>
+  <%end%>
+  <% for i in 1..@type3Low.size %>
+     <% @orderedType3.push(@type3Low.shift()) %>
+  <%end%>
+  <% for i in 1..@type4High.size %>
+     <% @orderedType4.push(@type4High.shift()) %>
+  <%end%>
+  <% for i in 1..@type4Medium.size %>
+     <% @orderedType4.push(@type4Medium.shift()) %>
+  <%end%>
+  <% for i in 1..@type4Low.size %>
+     <% @orderedType4.push(@type4Low.shift()) %>
+  <%end%>
+  <% for i in 1..@type5High.size %>
+     <% @orderedType5.push(@type5High.shift()) %>
+  <%end%>
+  <% for i in 1..@type5Medium.size %>
+     <% @orderedType5.push(@type5Medium.shift()) %>
+  <%end%>
+  <% for i in 1..@type5Low.size %>
+     <% @orderedType5.push(@type5Low.shift()) %>
+  <%end%>
+
+<% @mappingCalcTime = Hash.new%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <% if ( @tempModel == "Linear Waterfall" ) %>
+    <% @tempModel %>
+  <% elsif ( @tempModel == "Optimized Waterfall" ) %>
+    <% @tempModel %>
+  <% elsif ( @tempModel == "COTS" ) %>
+   
+<% @tempModel %>
+
+  <% @weekarr = Array.new %>
+   <% @weekDate = @dateTemp2 %>
+   
+
+ <% if ( @weeks == 5) %>
+
+ 
+
+   <%for i in 0..@weeks-1 %>
+     <% @weekarr[i] = @weekDate + 7 %>
+     <% if ( @weekarr[i] > @dateTemp3) %>
+       <% @weekarr[i] = @dateTemp3 %>
+       <% end %>
+     <% @weekDate = @weekDate + 7 %>
+
+   <%end%>
+
+   <% for i in 1..@numType1 %>
+     <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
+   <% end %>
+   <% for i in 1..@numType2 %>
+     <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
+   <% end %>
+   <% for i in 1..@numType3 %>
+     <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
+   <% end %>
+   <% for i in 1..@numType4 %>
+     <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
+   <% end %>
+   <% for i in 1..@numType5 %>
+     <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
+   <% end %>
+
+ <% else %>
+   <% for i in 0..4 %>
+     <%@weekarr[i] = @weekDate + (@days / 5) %>
+     <%=@weekarr[i]%>
+     <%= @days / 5 %>
+     <% if ( @weekarr[i] > @dateTemp3) %>
+       <% @weekarr[i] = @dateTemp3 %>
+       <% end %>
+     <% @weekDate = @weekDate + (@days / 5) %>
+   <%end%>
+
+   <% if(@numType1 > 0) %>
+   <% for i in 1..@numType1 %>
+     <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
+   <% end %>
+   <% end %>
+   <% if(@numType2 > 0) %>
+
+   <% for i in 1..@numType2 %>
+
+     <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
+
+   <% end %>
+
+   <% end %>
+
+   <% if(@numType3 > 0) %>
+   <% for i in 1..@numType3 %>
+     <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
+   <% end %>
+   <% end %>
+   <% if(@numType4 > 0) %>
+   <% for i in 1..@numType4 %>
+     <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
+   <% end %>
+   <% end %>
+   <% if(@numType5 > 0) %>
+   <% for i in 1..@numType5 %>
+     <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
+   <% end %>
+   <% end %>
+   <% end %>
+  <% elsif ( @tempModel == "RAD" ) %>
+    <% @tempModel %>
+  <% elsif ( @tempModel == "Agile" ) %>
+    <% @tempModel %>
+    <% @iterations = @days / 14 %>
+    <% @iterarr = Array.new %>
+    <% @iterationDate = @dateTemp2 %>
+
+    <% for i in 0..@iterations - 1 %>
+      <% @iterarr[i] = @iterationDate + 14 %>
+      <% @iterationDate = @iterationDate + 14 %>
+      <% if (@iterarr[i] > @dateTemp3) %>
+       <% @iterarr[i] = @dateTemp3 %>
+      <%end%>
+    <%end%>
+   <% @iterarr %>
+
+   <% @type1Remainder = @numType1 % @iterations %>
+   <% @type2Remainder = @numType2 % @iterations %>
+   <% @type3Remainder = @numType3 % @iterations %>
+   <% @type4Remainder = @numType4 % @iterations %>
+   <% @type5Remainder = @numType5 % @iterations %>
+
+
+   <% if(@iterations >= 1)%>
+     <% for i in 1..@iterations%>
+      <% if(@numType1/@iterations >= 1)%>
+        <% for j in 1..@numType1/@iterations %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[i-1]-12) %>
+        <%end%>
+      <%end%>
+      <% if(@numType2/@iterations >= 1)%>
+        <% for j in 1..@numType2/@iterations %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[i-1]-10) %>
+        <%end%>
+      <%end%>
+      <% if(@numType3/@iterations >= 1)%>
+        <% for j in 1..@numType3/@iterations %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[i-1]-6) %>
+        <%end%>
+      <%end%>
+      <% if(@numType4/@iterations >= 1)%>
+        <% for j in 1..@numType4/@iterations %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[i-1]-3) %>
+        <%end%>
+      <%end%>
+      <% if(@numType5/@iterations >= 1)%>
+        <% for j in 1..@numType5/@iterations %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[i-1]) %>
+        <%end%>
+      <%end%>
+     <%end%>
+   <%end%>
+
+   <% if(@iterations >= 1)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[@iterations-1]-12) %>
+        <%end%>
+      <%end%>
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[@iterations-1]-10) %>
+        <%end%>
+      <%end%>
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[@iterations-1]-6) %>
+        <%end%>
+      <%end%>
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[@iterations-1]-3) %>
+        <%end%>
+      <%end%>
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[@iterations-1]) %>
+        <%end%>
+      <%end%>
+    <%end%>
+
+
+
+  <%end%>
+
+
+
+
+
+
+
+
+    <% @mappingCalcTime %>
+
+
+
+
+
+
+
+
+    <div class="form-inputs">
+
+  <% @temp = 0 %>
+  <% @foundEntry = false %>
+  <%= month_calendar do |date| %>
+
+    <%= date %>
+    <% if(date == @startTemp) %>
+      <h3>START</h3>
+    <% elsif(date == @endTemp) %>
+      <h3>END</h3>
+    <%end%>
+
+     
+
+    <% @temp2 = 1 %>
+    <% while(@temp2 < @entry)%>
+    
+      <% @tempString = "time#{@temp2}" %>
+        <% if(@mapping[@tempString] != nil && @mapping[@tempString] != "") %>
+          <% @dateTemp = @mapping[@tempString] %>
+          <% @array = @dateTemp.split('/') %>
+          <% @dateString = "#{@array[2]}-#{@array[0]}-#{@array[1]}" %>
+          <% @dateTemp = Date.parse(@dateString) %>
+          <% if(date == @dateTemp) %>
+            <div>
+                <% @tempPriority = "priority#{@temp2}" %>
+                <% @tempKind = "type#{@temp2}" %>
+                <% if(@mapping[@tempPriority] == "High") %>
+                  <%= link_to(@mapping[@tempKind], "http://localhost:3000/schedulings/#{@scheduling.id}/editEntry/#{@temp2}", method: :get, class: "btn btn-danger") %>
+                <% elsif(@mapping[@tempPriority] == "Medium") %>
+                  <%= link_to(@mapping[@tempKind], "http://localhost:3000/schedulings/#{@scheduling.id}/editEntry/#{@temp2}", method: :get, class: "btn btn-warning") %>
+                <% else %>
+                  <%= link_to(@mapping[@tempKind], "http://localhost:3000/schedulings/#{@scheduling.id}/editEntry/#{@temp2}", method: :get, class: "btn btn-info") %>
+                <%end%>
+            </div>
+          <%end%>
+        <% else %>
+          <% if(date == @mappingCalcTime[@temp2]) %>
+            <div>
+                <% @tempPriority = "priority#{@temp2}" %>
+                <% @tempKind = "type#{@temp2}" %>
+                <% if(@mapping[@tempPriority] == "High") %>
+                  <%= link_to(@mapping[@tempKind], "http://localhost:3000/schedulings/#{@scheduling.id}/editEntry/#{@temp2}", method: :get, class: "btn btn-danger") %>
+                <% elsif(@mapping[@tempPriority] == "Medium") %>
+                  <%= link_to(@mapping[@tempKind], "http://localhost:3000/schedulings/#{@scheduling.id}/editEntry/#{@temp2}", method: :get, class: "btn btn-warning") %>
+                <% else %>
+                  <%= link_to(@mapping[@tempKind], "http://localhost:3000/schedulings/#{@scheduling.id}/editEntry/#{@temp2}", method: :get, class: "btn btn-info") %>
+                <%end%>
+            </div>
+          <%end%>
+        <%end%>
+
+
+
+
+
+
+
+
+      <% @temp2 = @temp2 + 1 %>
+    <%end%>
+  <% end %>
+
+  </script>
+    <br>
+    <br>
+    <h2>New Schedule Entries</h2>
+    <br>  
+    <em>*</em>
+    <%= f.label "Description" %>
+    <br>
+    <%= f.text_area @description.to_sym , input_html: { class: "form-control"} %>
+    <br>
+    <br>
+    <em>*</em>
+    <%= f.label "Type of Entry" %>
+    <br>
+    <%= f.select(@type.to_sym, options_for_select([['Documentation','Documentation'] , ['Design','Design'], ['Implementation','Implementation'] , ['Verification','Verification'], ['Deliverable','Deliverable']]))  %>
+    <br>
+    <br>
+    <em>*</em>
+    <%= f.label "Priority" %>
+    <br>
+    <%= f.select(@priority.to_sym, options_for_select([['High','High'] , ['Medium','Medium'], ['Low','Low']]))  %>
+    <br>
+    <br>
+    <%= f.label "Date" %>
+    <br>
+
+    <meta charset="utf-8">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+    $(function() {
+      $( "#time" ).datepicker();
+
+    });
+    </script>
+   
+      <%= f.text_field @time.to_sym,:id=>"time" %>
+      <br>
+      <br>
+      <br>
+      <br>
+    </script>
+    </div> 
+  <%end%>
+
+  
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>
+

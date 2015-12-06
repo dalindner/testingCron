@@ -3,7 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>Question1</th>
+      <th>Question</th>
+      <th>Prompt1</th>
+      <th>Prompt2</th>
+      <th>Prompt3</th>
+      <th>Prompt4</th>
       <th>Score1p1</th>
       <th>Score2p1</th>
       <th>Score3p1</th>
@@ -28,6 +32,10 @@
       <th>Score2p5</th>
       <th>Score3p5</th>
       <th>Score4p5</th>
+      <th>Score1p6</th>
+      <th>Score2p6</th>
+      <th>Score3p6</th>
+      <th>Score4p6</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -35,7 +43,11 @@
   <tbody>
     <% @requirement_qs.each do |requirement_q| %>
       <tr>
-        <td><%= requirement_q.question1 %></td>
+        <td><%= requirement_q.question %></td>
+        <td><%= requirement_q.prompt1 %></td>
+        <td><%= requirement_q.prompt2 %></td>
+        <td><%= requirement_q.prompt3 %></td>
+        <td><%= requirement_q.prompt4 %></td>
         <td><%= requirement_q.score1P1 %></td>
         <td><%= requirement_q.score2P1 %></td>
         <td><%= requirement_q.score3P1 %></td>
@@ -60,6 +72,10 @@
         <td><%= requirement_q.score2P5 %></td>
         <td><%= requirement_q.score3P5 %></td>
         <td><%= requirement_q.score4P5 %></td>
+        <td><%= requirement_q.score1P6 %></td>
+        <td><%= requirement_q.score2P6 %></td>
+        <td><%= requirement_q.score3P6 %></td>
+        <td><%= requirement_q.score4P6 %></td>
         <td><%= link_to 'Show', requirement_q %></td>
         <td><%= link_to 'Edit', edit_requirement_q_path(requirement_q) %></td>
         <td><%= link_to 'Destroy', requirement_q, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,0 +1,53 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2>Your Project Scores<br></h2>
+  <h4>Linear Waterfall:<%=@project.scoreModel1%><br></h4>
+  <h4>Optimized Waterfall:<%=@project.scoreModel2%><br></h4>
+  <h4>Agile:<%=@project.scoreModel3%><br></h4>
+  <h4>RAD:<%=@project.scoreModel4%><br></h4>
+  <h4>COTS:<%=@project.scoreModel5%><br></h4>
+  <h4>Special:<%=@project.scoreModel6%><br></h4>
+  <br>
+  <br>
+
+	 <% @max = [@project.scoreModel1, @project.scoreModel2, @project.scoreModel3, @project.scoreModel4, @project.scoreModel5, @project.scoreModel6].max %>
+	<% if(@max == @project.scoreModel3) %>
+    <h2>We Recommend Agile</h2>
+    <div class="field">
+      <%= f.select(:process_model, options_for_select([["Agile","Agile"], ["Linear Waterfall","Linear Waterfall"], ["Optimized Waterfall","Optimized Waterfall"], ["RAD","RAD"], ["COTS","COTS"], ["Special","Special"]])) %>
+    </div>
+	<% elsif(@max == @project.scoreModel2) %>
+	  <h2>We Recommend Optimized Waterfall</h2>
+	  <%= f.select(:process_model, options_for_select([["Optimized Waterfall","Optimized Waterfall"], ["Linear Waterfall","Linear Waterfall"], ["Agile","Agile"], ["RAD","RAD"], ["COTS","COTS"], ["Special","Special"]])) %>
+	<% elsif(@max == @project.scoreModel1) %>
+    <h2>We Recommend Linear Waterfall</h2>
+    <%= f.select(:process_model, options_for_select([["Linear Waterfall","Linear Waterfall"], ["Optimized Waterfall","Optimized Waterfall"], ["Agile","Agile"], ["RAD","RAD"], ["COTS","COTS"], ["Special","Special"]])) %>
+	<% elsif(@max == @project.scoreModel4) %>
+	  <h2>We Recommend RAD</h2>
+	  <%= f.select(:process_model, options_for_select([["RAD","RAD"], ["Linear Waterfall","Linear Waterfall"], ["Optimized Waterfall","Optimized Waterfall"], ["Agile","Agile"], ["COTS","COTS"], ["Special","Special"]])) %>
+	<% elsif(@max == @project.scoreModel5) %>
+	  <h2>We Recommend COTS</h2>
+	  <%= f.select(:process_model, options_for_select([["COTS","COTS"], ["Linear Waterfall","Linear Waterfall"], ["Optimized Waterfall","Optimized Waterfall"], ["Agile","Agile"], ["RAD","RAD"], ["Special","Special"]])) %>
+	<% elsif(@max == @project.scoreModel6) %>
+	  <h2>We Recommend Special</h2>
+	  <%= f.select(:process_model, options_for_select([["Special","Special"], ["Linear Waterfall","Linear Waterfall"], ["Optimized Waterfall","Optimized Waterfall"], ["Agile","Agile"], ["RAD","RAD"], ["COTS","COTS"]])) %>
+	<%end%>
+
+  <br>
+  <br>
+  <br>
+  <div class="actions">
+    <%= f.submit "Update Process Model", class: "btn btn-primary" %>
+  </div>
+<% end %>

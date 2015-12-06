@@ -1,0 +1,2 @@
+module AboutTheUserQsHelper
+end

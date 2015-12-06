@@ -9,5 +9,8 @@ class AddStuffToUsers < ActiveRecord::Migration
     add_column :users, :phoneNumberSecondary, :string
     add_column :users, :company, :string
     add_column :users, :project, :string
+    add_column :users, :inteam, :boolean, default: false
+    add_column :users, :from, :string, default: "self"
+    add_column :users, :allow, :boolean, default: false
   end
 end

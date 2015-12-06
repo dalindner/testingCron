@@ -1,0 +1,2 @@
+module AnswerAboutTheTeamQsHelper
+end

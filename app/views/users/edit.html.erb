@@ -1,0 +1,67 @@
+
+  <h2>Edit user</h2>
+
+<%= form_for(@user) do |f| %>
+
+  <div class="form-group">
+    <%= f.label "Company" %><br />
+    <%= f.text_field :company, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "User ID: " %>
+    <em><%=@user.inputId%></em><br />
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Name" %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Age" %> <%= f.select :age, ((0..100).map {|i| [i,i] }) %>
+    <%= f.label "Gender" %> <%= f.select(:gender, options_for_select([['Male','Male'], ['Female', 'Female']], selected: @user.gender)) %>
+
+    <% if current_user.role == "Admin" %>
+      <%= f.label "Role" %> <%= f.select(:role, options_for_select([['Team Member','Team Member'], ['Team Leader', 'Leader'], ['Admin']], selected: @user.role)) %>
+    <% else %>
+      <div class="form-group">
+        <%= f.label "Role: " %>
+        <em><%=@user.role%></em><br />
+      </div>
+    <%end%>
+
+
+    <% if current_user.role == "Admin" %>
+      <%= f.label "Specialty" %> <%= f.select(:specialty, options_for_select([['Member - Software Developer','Member - Software Developer'], ['Member - Tester','Member - Tester'] , ['Member - Designer','Member - Designer'], ['Member - HR','Member - HR'], ['Member - Systems','Member - Systems'], ['Member - Hardware','Member - Hardware'], ['Team Leader', 'Team Leader'], ['Admin']], selected: @user.specialty))  %>
+    <% else %>
+      <%= f.label "Specialty" %> <%= f.select(:specialty, options_for_select([['Member - Software Developer','Member - Software Developer'], ['Member - Tester','Member - Tester'] , ['Member - Designer','Member - Designer'], ['Member - HR','Member - HR'], ['Member - Systems','Member - Systems'], ['Member - Hardware','Member - Hardware']], selected: @user.specialty))  %>
+    <%end%>
+
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Primary Phone Number" %><br />
+    <%= f.text_field :phoneNumber, autofocus: false, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Secondary Phone Number" %><br />
+    <%= f.text_field :phoneNumberSecondary, autofocus: false, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Primary Email: " %>
+    <em><%=@user.email%></em><br />
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Secondary Email: " %>
+    <em><%=@user.emailSecondary%></em><br />
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+  </div>
+<% end %>
+

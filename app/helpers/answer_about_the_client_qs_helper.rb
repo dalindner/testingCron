@@ -1,0 +1,2 @@
+module AnswerAboutTheClientQsHelper
+end

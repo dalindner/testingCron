@@ -1,0 +1,2 @@
+module AnswerToolQsHelper
+end

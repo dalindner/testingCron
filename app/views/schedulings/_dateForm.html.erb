@@ -1,0 +1,77 @@
+<%= simple_form_for(@scheduling) do |f| %>
+  <%= f.error_notification %>
+
+  <% @startTemp == "" %>
+  <% @endTemp == "" %>
+  <% state = 0 %>
+  <% if(@scheduling.startDate == nil || @scheduling.startDate == "" || @scheduling.endDate == nil || @scheduling.endDate == "") %>
+    <% state = 0 %>
+
+  <% else %>
+
+    <% @startTemp = @scheduling.startDate %>
+    <% @arrayStart = @startTemp.split('/') %>
+    <% @startString = "#{@arrayStart[2]}-#{@arrayStart[0]}-#{@arrayStart[1]}" %>
+    <% @startTemp = Date.parse(@startString) %>
+
+    <% @endTemp = @scheduling.endDate %>
+    <% @arrayEnd = @endTemp.split('/') %>
+    <% @endString = "#{@arrayEnd[2]}-#{@arrayEnd[0]}-#{@arrayEnd[1]}" %>
+    <% @endTemp = Date.parse(@endString) %>
+
+    <% if(@startTemp >= @endTemp) %>
+      <% state = 1 %>
+    <% else %>
+      <% state = 2 %>
+    <%end%>
+  <%end%>
+
+  <br>
+
+  <em>*</em>
+  <%= f.label "Start Date" %>
+  <br>
+
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+    $(function() {
+      $( "#start" ).datepicker();
+
+    });
+  </script>
+  <%= f.text_field :startDate,:id=>"start" %>
+  <br>
+  <br>
+
+  <em>*</em>
+  <%= f.label "End Date" %>
+  <br>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+    $(function() {
+      $( "#end" ).datepicker();
+
+    });
+  </script>
+ 
+  <%= f.text_field :endDate,:id=>"end" %>
+
+  <br>
+  <br>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+  <br>
+
+<% end %>

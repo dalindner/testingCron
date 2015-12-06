@@ -1,0 +1,89 @@
+<h1>Listing tool_qs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Prompt1</th>
+      <th>Prompt2</th>
+      <th>Prompt3</th>
+      <th>Prompt4</th>
+      <th>Score1p1</th>
+      <th>Score2p1</th>
+      <th>Score3p1</th>
+      <th>Score4p1</th>
+      <th>Score1p2</th>
+      <th>Score2p2</th>
+      <th>Score3p2</th>
+      <th>Score4p2</th>
+      <th>Score1p3</th>
+      <th>Score2p3</th>
+      <th>Score3p3</th>
+      <th>Score4p3</th>
+      <th>Score1p4</th>
+      <th>Score2p4</th>
+      <th>Score3p4</th>
+      <th>Score4p4</th>
+      <th>Score1p5</th>
+      <th>Score2p5</th>
+      <th>Score3p5</th>
+      <th>Score4p5</th>
+      <th>Score1p5</th>
+      <th>Score2p5</th>
+      <th>Score3p5</th>
+      <th>Score4p5</th>
+      <th>Score1p6</th>
+      <th>Score2p6</th>
+      <th>Score3p6</th>
+      <th>Score4p6</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tool_qs.each do |tool_q| %>
+      <tr>
+        <td><%= tool_q.question %></td>
+        <td><%= tool_q.prompt1 %></td>
+        <td><%= tool_q.prompt2 %></td>
+        <td><%= tool_q.prompt3 %></td>
+        <td><%= tool_q.prompt4 %></td>
+        <td><%= tool_q.score1P1 %></td>
+        <td><%= tool_q.score2P1 %></td>
+        <td><%= tool_q.score3P1 %></td>
+        <td><%= tool_q.score4P1 %></td>
+        <td><%= tool_q.score1P2 %></td>
+        <td><%= tool_q.score2P2 %></td>
+        <td><%= tool_q.score3P2 %></td>
+        <td><%= tool_q.score4P2 %></td>
+        <td><%= tool_q.score1P3 %></td>
+        <td><%= tool_q.score2P3 %></td>
+        <td><%= tool_q.score3P3 %></td>
+        <td><%= tool_q.score4P3 %></td>
+        <td><%= tool_q.score1P4 %></td>
+        <td><%= tool_q.score2P4 %></td>
+        <td><%= tool_q.score3P4 %></td>
+        <td><%= tool_q.score4P4 %></td>
+        <td><%= tool_q.score1P5 %></td>
+        <td><%= tool_q.score2P5 %></td>
+        <td><%= tool_q.score3P5 %></td>
+        <td><%= tool_q.score4P5 %></td>
+        <td><%= tool_q.score1P5 %></td>
+        <td><%= tool_q.score2P5 %></td>
+        <td><%= tool_q.score3P5 %></td>
+        <td><%= tool_q.score4P5 %></td>
+        <td><%= tool_q.score1P6 %></td>
+        <td><%= tool_q.score2P6 %></td>
+        <td><%= tool_q.score3P6 %></td>
+        <td><%= tool_q.score4P6 %></td>
+        <td><%= link_to 'Show', tool_q %></td>
+        <td><%= link_to 'Edit', edit_tool_q_path(tool_q) %></td>
+        <td><%= link_to 'Destroy', tool_q, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tool q', new_tool_q_path %>

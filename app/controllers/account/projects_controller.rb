@@ -1,10 +1,14 @@
 class Account::ProjectsController < ApplicationController
- before_action :authenticate_user!
+	before_action :authenticate_user!
 
- def index
-     Team = current_user.participated_teams.all
-  	 Team.all.each do |project|
-  	 	
-
- end
+	def index
+	    @teams = current_user.participated_teams
+	    @i = 1
+	  	@teams.each do |team|
+	  		#@projects = team.projects
+	  		@projects = Project.where(:id => @i)
+	  		@i = @i + 1
+	  	end	
+	  	
+	end
 end

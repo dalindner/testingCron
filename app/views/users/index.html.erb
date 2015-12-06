@@ -1,0 +1,28 @@
+ <div class="col-md-12">
+  <div class="user">
+    <%= link_to("New user", new_usersA_path, class: "btn btn-primary pull-right") %>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Team</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>#</td>
+          <td><%= user.name %></td>
+          <td><%= link_to(user.participated_teams.first.id, team_path(user.participated_teams.first)) %></td>
+          <td>
+              <%= link_to("Edit", edit_usersA_path(user), class: "btn btn-sm btn-default")%>
+              <%= link_to("Delete", usersA_path(user),    class: "btn btn-sm btn-default", 
+                          method: :delete, data: { confirm: "Are you sure?" } )%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
