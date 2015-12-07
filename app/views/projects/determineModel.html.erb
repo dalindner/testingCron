@@ -5,10 +5,10 @@
   </div>
 
 <% @descriptionTemp = @project.process_model %>
-<% if(@descriptionTemp == "Linear Waterfall" || @descriptionTemp == "Optimized Waterfall" || @descriptionTemp == "Agile" || @descriptionTemp == "RAD" || @descriptionTemp == "COTS" || @descriptionTemp == "Special") %>
+<% if(@descriptionTemp == "Linear Waterfall" || @descriptionTemp == "Optimized Waterfall" || @descriptionTemp == "Agile" || @descriptionTemp == "RAD" || @descriptionTemp == "COTS") %>
   <h2>Your current process model is: <%=@project.process_model%></h2>
 <% else %>
-  <h2>Process model hasn't been selected yet</h2>
+  <h2>Your current process model is: Spiral</h2>
 <%end%>
 <br>
 <br>

@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-	validates :title, presence: true
+	validates :title, presence: true, length: { minimum: 4 }
 
 	has_many :projects, dependent: :destroy
 	has_many :team_users

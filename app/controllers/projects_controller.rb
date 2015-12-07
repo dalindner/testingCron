@@ -14,8 +14,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = @team.projects.new
-    @project.finish = false
-    @project.save
+
   end
 
   def edit

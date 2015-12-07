@@ -17,20 +17,16 @@
    
    <% else %>   
           
-          <% if (current_user.role == "Leader") %>   
+          <% if (current_user.role == "Leader" && current_user.is_member_of?(@team)) %>   
               <%= link_to("Edit Team",  edit_team_path(@team), class: "btn btn-info pull-right")%>
           <% else %>    
-              <%= link_to("Edit Team", team_path(@team), data: { confirm: "You need to be team leader or admin to edit team." }, class: "btn btn-info pull-right" )%>
+              <%= link_to("Edit Team", team_path(@team), data: { confirm: "You aren't allowed to edit a team you aren't a member of." }, class: "btn btn-info pull-right" )%>
           <% end %>
    <% end %>   
 
 
    <% if current_user.present? %>
-     <% if current_user.is_member_of?(@team) %>
-       <%= link_to("Quit Team", quit_team_path(@team), method: :get, class: "btn btn-danger", data: { confirm: "Are you sure?"}) %>
-     <% else %>
-       <%= link_to("Join Team", join_team_path(@team), method: :get, class: "btn btn-info") %>
-     <% end %>
+
    <% end %>
 
   </div>
@@ -63,15 +59,28 @@
             <% end %>
           <td>  
           <% if project.finish == false %>
-            <% if current_user.role == "Admin" %>
-              <%= link_to("Schedule", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "Admins aren't allowed to manipulate schedule"}) %> 
+            <% if current_user.role == "Admin" && !current_user.is_member_of?(@team)%>
+              <%= link_to("Schedule", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "Admins who aren't part of the team aren't allowed to manipulate schedule"}) %> 
               <%= link_to("Determine Process Model", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "Admins aren't allowed to answer project questions"} ) %>  
+              <% elsif current_user.role == "Team Member" && (!current_user.is_member_of?(@team) || current_user.allow == false)%>
+              <%= link_to("Schedule", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "You aren't allowed to manipulate schedule"}) %> 
+              <%= link_to("Determine Process Model", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "You aren't allowed to answer project questions"} ) %>  
+              <% elsif current_user.role == "Team Leader" && (!current_user.is_member_of?(@team))%>
+              <%= link_to("Schedule", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "You aren't allowed to manipulate schedule"}) %> 
+              <%= link_to("Determine Process Model", team_path(@team), class: "btn btn-default btn-xs", data: { confirm: "You aren't allowed to answer project questions"} ) %>  
             <%else%>
               <%= link_to("Schedule", edit_scheduling_path(project.id), class: "btn btn-default btn-xs") %> 
               <%= link_to("Determine Process Model", questions_project_path(project.id), class: "btn btn-default btn-xs") %>  
             <%end%>
-            <%= link_to("Edit Project", edit_team_project_path(project.team, project),class: "btn btn-info btn-xs")%>            
+            <%= link_to("Edit Project", edit_team_project_path(project.team, project),class: "btn btn-info btn-xs")%>      
+
+          <% if ( current_user.role == "Team Leader" || (current_user.role == "Admin" &&current_user.is_member_of?(@team))) %>  
             <%= link_to("Finish", finish_project_path(project.id), class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } )%>
+          <% else %>  
+            <%= link_to("Finish", team_path(@team), data: { confirm: "Only Admins and Team Leaders can finish projects" }, class: "btn btn-danger btn-xs" )%>
+          <% end %>
+
+
           <% end %> 
           </td>  
           <% else %>

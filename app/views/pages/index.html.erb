@@ -49,7 +49,7 @@
                            <% if current_user.is_member_of?(team) %>
                           <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
                            <% else %>
-                            <% if current_user.participated_teams.size == 0 %>
+                            <% if current_user.participated_teams.size == 0  && current_user.role == "Admin"%>
                               <td> <%= link_to("Join Team", join_team_path(team.id), method: :get, class: "btn btn-info btn-xs") %> </td>
                             <%end%>
                           <% end %>
@@ -82,6 +82,7 @@
                               <% else %> 
                                      <td> Not in any team </td>
                               <% end %> 
+                              <td> <%= link_to("Edit User", edit_usersA_path(user), class: "btn btn-info btn-xs") %> </td>
                               <% if (user.inteam == true) %> 
                                   <% @teamaa= user.participated_teams %>
                                   <td> <%= link_to("Move out From Current Team", "http://localhost:3000/teams/#{@teamaa.first.id}/remove/#{user.id}", method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
@@ -133,7 +134,7 @@
                            <% if current_user.is_member_of?(team) %>
                             <td> <%= link_to("Quit Team", quit_team_path(team.id), method: :get, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?"}) %> </td>
                            <% else %>
-                            <% if current_user.participated_teams.size == 0 %>
+                            <% if current_user.participated_teams.size == 0 && current_user.role == "Admin"%>
                               <td> <%= link_to("Join Team", join_team_path(team.id), method: :get, class: "btn btn-info btn-xs") %> </td>
                             <% end %>
                           <% end %>

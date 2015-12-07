@@ -333,94 +333,97 @@
 
 
 
-
-
   <% if ( @tempModel == "Linear Waterfall" ) %>
     <% @tempModel %>
+    <% @weekarr = Array.new %>
+    <% @weekDate = @dateTemp2 %>
+    
+
+  <% if ( @weeks == 5) %>
+
+  
+
+    <%for i in 0..@weeks-1 %>
+      <% @weekarr[i] = @weekDate + 7 %>
+      <% if ( @weekarr[i] > @dateTemp3) %>
+        <% @weekarr[i] = @dateTemp3 %>
+        <% end %>
+      <% @weekDate = @weekDate + 7 %>
+
+    <%end%>
+
+    <% for i in 1..@numType1 %>
+      <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
+    <% end %>
+    <% for i in 1..@numType2 %>
+      <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
+    <% end %>
+    <% for i in 1..@numType3 %>
+      <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
+    <% end %>
+    <% for i in 1..@numType4 %>
+      <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
+    <% end %>
+    <% for i in 1..@numType5 %>
+      <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
+    <% end %>
+
+  <% else %>
+    <% for i in 0..4 %>
+      <%@weekarr[i] = @weekDate + (@days / 5) %>
+      <%@weekarr[i]%>
+      <% @days / 5 %>
+      <% if ( @weekarr[i] > @dateTemp3) %>
+        <% @weekarr[i] = @dateTemp3 %>
+        <% end %>
+      <% @weekDate = @weekDate + (@days / 5) %>
+    <%end%>
+
+    <% if(@numType1 > 0) %>
+    <% for i in 1..@numType1 %>
+      <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
+    <% end %>
+    <% end %>
+    <% if(@numType2 > 0) %>
+
+    <% for i in 1..@numType2 %>
+
+      <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
+
+    <% end %>
+
+    <% end %>
+
+    <% if(@numType3 > 0) %>
+    <% for i in 1..@numType3 %>
+      <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
+    <% end %>
+    <% end %>
+    <% if(@numType4 > 0) %>
+    <% for i in 1..@numType4 %>
+      <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
+    <% end %>
+    <% end %>
+    <% if(@numType5 > 0) %>
+    <% for i in 1..@numType5 %>
+      <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
+    <% end %>
+    <% end %>
+
+  <%end%>
+
+
+
+
+
+
+
+
+
+
   <% elsif ( @tempModel == "Optimized Waterfall" ) %>
     <% @tempModel %>
-  <% elsif ( @tempModel == "COTS" ) %>
-   
-<% @tempModel %>
 
-  <% @weekarr = Array.new %>
-   <% @weekDate = @dateTemp2 %>
-   
-
- <% if ( @weeks == 5) %>
-
- 
-
-   <%for i in 0..@weeks-1 %>
-     <% @weekarr[i] = @weekDate + 7 %>
-     <% if ( @weekarr[i] > @dateTemp3) %>
-       <% @weekarr[i] = @dateTemp3 %>
-       <% end %>
-     <% @weekDate = @weekDate + 7 %>
-
-   <%end%>
-
-   <% for i in 1..@numType1 %>
-     <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
-   <% end %>
-   <% for i in 1..@numType2 %>
-     <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
-   <% end %>
-   <% for i in 1..@numType3 %>
-     <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
-   <% end %>
-   <% for i in 1..@numType4 %>
-     <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
-   <% end %>
-   <% for i in 1..@numType5 %>
-     <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
-   <% end %>
-
- <% else %>
-   <% for i in 0..4 %>
-     <%@weekarr[i] = @weekDate + (@days / 5) %>
-     <%=@weekarr[i]%>
-     <%= @days / 5 %>
-     <% if ( @weekarr[i] > @dateTemp3) %>
-       <% @weekarr[i] = @dateTemp3 %>
-       <% end %>
-     <% @weekDate = @weekDate + (@days / 5) %>
-   <%end%>
-
-   <% if(@numType1 > 0) %>
-   <% for i in 1..@numType1 %>
-     <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
-   <% end %>
-   <% end %>
-   <% if(@numType2 > 0) %>
-
-   <% for i in 1..@numType2 %>
-
-     <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
-
-   <% end %>
-
-   <% end %>
-
-   <% if(@numType3 > 0) %>
-   <% for i in 1..@numType3 %>
-     <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
-   <% end %>
-   <% end %>
-   <% if(@numType4 > 0) %>
-   <% for i in 1..@numType4 %>
-     <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
-   <% end %>
-   <% end %>
-   <% if(@numType5 > 0) %>
-   <% for i in 1..@numType5 %>
-     <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
-   <% end %>
-   <% end %>
-   <% end %>
-  <% elsif ( @tempModel == "RAD" ) %>
-    <% @tempModel %>
-  <% elsif ( @tempModel == "Agile" ) %>
     <% @tempModel %>
     <% @iterations = @days / 14 %>
     <% @iterarr = Array.new %>
@@ -433,35 +436,44 @@
        <% @iterarr[i] = @dateTemp3 %>
       <%end%>
     <%end%>
-   <% @iterarr %>
 
-   <% @type1Remainder = @numType1 % @iterations %>
-   <% @type2Remainder = @numType2 % @iterations %>
-   <% @type3Remainder = @numType3 % @iterations %>
-   <% @type4Remainder = @numType4 % @iterations %>
-   <% @type5Remainder = @numType5 % @iterations %>
+   <% if @iterations != 0 %>
+     <% @type1Remainder = @numType1 % @iterations %>
+     <% @type2Remainder = @numType2 % @iterations %>
+     <% @type3Remainder = @numType3 % @iterations %>
+     <% @type4Remainder = @numType4 % @iterations %>
+     <% @type5Remainder = @numType5 % @iterations %>
+   <% else %>
+     <% @type1Remainder = @numType1 %>
+     <% @type2Remainder = @numType2 %>
+     <% @type3Remainder = @numType3 %>
+     <% @type4Remainder = @numType4 %>
+     <% @type5Remainder = @numType5 %>
 
+   <%end%>
+   
 
+  
    <% if(@iterations >= 1)%>
      <% for i in 1..@iterations%>
       <% if(@numType1/@iterations >= 1)%>
         <% for j in 1..@numType1/@iterations %>
-          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[i-1]-12) %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[i-1] - 12 ) %>
         <%end%>
       <%end%>
       <% if(@numType2/@iterations >= 1)%>
         <% for j in 1..@numType2/@iterations %>
-          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[i-1]-10) %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[i-1] - 10 ) %>
         <%end%>
       <%end%>
       <% if(@numType3/@iterations >= 1)%>
         <% for j in 1..@numType3/@iterations %>
-          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[i-1]-6) %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[i-1 ] - 6) %>
         <%end%>
       <%end%>
       <% if(@numType4/@iterations >= 1)%>
         <% for j in 1..@numType4/@iterations %>
-          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[i-1]-3) %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[i-1] - 3) %>
         <%end%>
       <%end%>
       <% if(@numType5/@iterations >= 1)%>
@@ -475,24 +487,498 @@
    <% if(@iterations >= 1)%>
       <% if(@type1Remainder >= 1)%>
         <% for j in 1..@type1Remainder %>
-          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[@iterations-1]-12) %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[@iterations-1] - 12) %>
         <%end%>
       <%end%>
+
       <% if(@type2Remainder >= 1)%>
         <% for j in 1..@type2Remainder %>
-          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[@iterations-1]-10) %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[@iterations-1] - 10) %>
         <%end%>
       <%end%>
+
       <% if(@type3Remainder >= 1)%>
         <% for j in 1..@type3Remainder %>
-          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[@iterations-1]-6) %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[@iterations-1] - 6) %>
         <%end%>
       <%end%>
+
       <% if(@type4Remainder >= 1)%>
         <% for j in 1..@type4Remainder %>
-          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[@iterations-1]-3) %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[@iterations-1] - 3) %>
         <%end%>
       <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[@iterations-1]) %>
+        <%end%>
+      <%end%>
+    <%end%>
+
+    <% if(@iterations == 0)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @dateTemp3)%>
+        <%end%>
+      <%end%>
+    <%end%>
+
+  <% elsif ( @tempModel == "COTS" ) %>
+   <% @tempModel %>
+
+   <% @weekarr = Array.new %>
+    <% @weekDate = @dateTemp2 %>
+    
+
+  <% if ( @weeks == 5) %>
+
+  
+
+    <%for i in 0..@weeks-1 %>
+      <% @weekarr[i] = @weekDate + 7 %>
+      <% if ( @weekarr[i] > @dateTemp3) %>
+        <% @weekarr[i] = @dateTemp3 %>
+        <% end %>
+      <% @weekDate = @weekDate + 7 %>
+
+    <%end%>
+
+    <% for i in 1..@numType1 %>
+      <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
+    <% end %>
+    <% for i in 1..@numType2 %>
+      <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
+    <% end %>
+    <% for i in 1..@numType3 %>
+      <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
+    <% end %>
+    <% for i in 1..@numType4 %>
+      <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
+    <% end %>
+    <% for i in 1..@numType5 %>
+      <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
+    <% end %>
+
+  <% else %>
+    <% for i in 0..4 %>
+      <%@weekarr[i] = @weekDate + (@days / 5) %>
+      <%@weekarr[i]%>
+      <% @days / 5 %>
+      <% if ( @weekarr[i] > @dateTemp3) %>
+        <% @weekarr[i] = @dateTemp3 %>
+        <% end %>
+      <% @weekDate = @weekDate + (@days / 5) %>
+    <%end%>
+
+    <% if(@numType1 > 0) %>
+    <% for i in 1..@numType1 %>
+      <% @mappingCalcTime.store(@orderedType1.shift(), @weekarr[0]) %>
+    <% end %>
+    <% end %>
+    <% if(@numType2 > 0) %>
+
+    <% for i in 1..@numType2 %>
+
+      <% @mappingCalcTime.store(@orderedType2.shift(), @weekarr[1]) %>
+
+    <% end %>
+
+    <% end %>
+
+    <% if(@numType3 > 0) %>
+    <% for i in 1..@numType3 %>
+      <% @mappingCalcTime.store(@orderedType3.shift(), @weekarr[2]) %>
+    <% end %>
+    <% end %>
+    <% if(@numType4 > 0) %>
+    <% for i in 1..@numType4 %>
+      <% @mappingCalcTime.store(@orderedType4.shift(), @weekarr[3]) %>
+    <% end %>
+    <% end %>
+    <% if(@numType5 > 0) %>
+    <% for i in 1..@numType5 %>
+      <% @mappingCalcTime.store(@orderedType5.shift(), @weekarr[4]) %>
+    <% end %>
+    <% end %>
+
+  <%end%>
+
+
+
+
+  <% elsif ( @tempModel == "RAD" ) %>
+    <% @tempModel %>
+
+    <% @tempModel %>
+    <% @iterations = @days / 90 %>
+    <% @iterarr = Array.new %>
+    <% @iterationDate = @dateTemp2 %>
+
+    <% for i in 0..@iterations - 1 %>
+      <% @iterarr[i] = @iterationDate + 90 %>
+      <% @iterationDate = @iterationDate + 90 %>
+      <% if (@iterarr[i] > @dateTemp3) %>
+       <% @iterarr[i] = @dateTemp3 %>
+      <%end%>
+    <%end%>
+
+   <% if @iterations != 0 %>
+     <% @type1Remainder = @numType1 % @iterations %>
+     <% @type2Remainder = @numType2 % @iterations %>
+     <% @type3Remainder = @numType3 % @iterations %>
+     <% @type4Remainder = @numType4 % @iterations %>
+     <% @type5Remainder = @numType5 % @iterations %>
+   <% else %>
+     <% @type1Remainder = @numType1 %>
+     <% @type2Remainder = @numType2 %>
+     <% @type3Remainder = @numType3 %>
+     <% @type4Remainder = @numType4 %>
+     <% @type5Remainder = @numType5 %>
+
+   <%end%>
+   
+
+  
+   <% if(@iterations >= 1)%>
+     <% for i in 1..@iterations%>
+      <% if(@numType1/@iterations >= 1)%>
+        <% for j in 1..@numType1/@iterations %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[i-1] - 70 ) %>
+        <%end%>
+      <%end%>
+      <% if(@numType2/@iterations >= 1)%>
+        <% for j in 1..@numType2/@iterations %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[i-1] - 60 ) %>
+        <%end%>
+      <%end%>
+      <% if(@numType3/@iterations >= 1)%>
+        <% for j in 1..@numType3/@iterations %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[i-1 ] - 40) %>
+        <%end%>
+      <%end%>
+      <% if(@numType4/@iterations >= 1)%>
+        <% for j in 1..@numType4/@iterations %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[i-1] - 20) %>
+        <%end%>
+      <%end%>
+      <% if(@numType5/@iterations >= 1)%>
+        <% for j in 1..@numType5/@iterations %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[i-1]) %>
+        <%end%>
+      <%end%>
+     <%end%>
+   <%end%>
+
+   <% if(@iterations >= 1)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[@iterations-1] - 70) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[@iterations-1] - 60) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[@iterations-1] - 40) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[@iterations-1] - 20) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[@iterations-1]) %>
+        <%end%>
+      <%end%>
+    <%end%>
+
+    <% if(@iterations == 0)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @dateTemp3)%>
+        <%end%>
+      <%end%>
+    <%end%>
+
+
+
+
+
+
+
+
+  <% elsif ( @tempModel == "Agile" ) %>
+    <% @tempModel %>
+    <% @iterations = @days / 14 %>
+    <% @iterarr = Array.new %>
+    <% @iterationDate = @dateTemp2 %>
+
+    <% for i in 0..@iterations - 1 %>
+      <% @iterarr[i] = @iterationDate + 14 %>
+      <% @iterationDate = @iterationDate + 14 %>
+      <% if (@iterarr[i] > @dateTemp3) %>
+       <% @iterarr[i] = @dateTemp3 %>
+      <%end%>
+    <%end%>
+
+
+   <% if @iterations != 0 %>
+     <% @type1Remainder = @numType1 % @iterations %>
+     <% @type2Remainder = @numType2 % @iterations %>
+     <% @type3Remainder = @numType3 % @iterations %>
+     <% @type4Remainder = @numType4 % @iterations %>
+     <% @type5Remainder = @numType5 % @iterations %>
+   <% else %>
+     <% @type1Remainder = @numType1 %>
+     <% @type2Remainder = @numType2 %>
+     <% @type3Remainder = @numType3 %>
+     <% @type4Remainder = @numType4 %>
+     <% @type5Remainder = @numType5 %>
+
+   <%end%>
+   
+
+  
+   <% if(@iterations >= 1)%>
+     <% for i in 1..@iterations%>
+      <% if(@numType1/@iterations >= 1)%>
+        <% for j in 1..@numType1/@iterations %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[i-1] - 12 ) %>
+        <%end%>
+      <%end%>
+      <% if(@numType2/@iterations >= 1)%>
+        <% for j in 1..@numType2/@iterations %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[i-1] - 10 ) %>
+        <%end%>
+      <%end%>
+      <% if(@numType3/@iterations >= 1)%>
+        <% for j in 1..@numType3/@iterations %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[i-1 ] - 6) %>
+        <%end%>
+      <%end%>
+      <% if(@numType4/@iterations >= 1)%>
+        <% for j in 1..@numType4/@iterations %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[i-1] - 3) %>
+        <%end%>
+      <%end%>
+      <% if(@numType5/@iterations >= 1)%>
+        <% for j in 1..@numType5/@iterations %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[i-1]) %>
+        <%end%>
+      <%end%>
+     <%end%>
+   <%end%>
+
+   <% if(@iterations >= 1)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[@iterations-1] - 12) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[@iterations-1] - 10) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[@iterations-1] - 6) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[@iterations-1] - 3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[@iterations-1]) %>
+        <%end%>
+      <%end%>
+    <%end%>
+
+    <% if(@iterations == 0)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @dateTemp3)%>
+        <%end%>
+      <%end%>
+    <%end%>
+
+
+
+<% elsif ( @tempModel == "Special" ) %>
+    <% @tempModel %>
+    <% @iterations = @days / 30 %>
+    <% @iterarr = Array.new %>
+    <% @iterationDate = @dateTemp2 %>
+
+    <% for i in 0..@iterations - 1 %>
+      <% @iterarr[i] = @iterationDate + 30 %>
+      <% @iterationDate = @iterationDate + 30 %>
+      <% if (@iterarr[i] > @dateTemp3) %>
+       <% @iterarr[i] = @dateTemp3 %>
+      <%end%>
+    <%end%>
+
+   <% if @iterations != 0 %>
+     <% @type1Remainder = @numType1 % @iterations %>
+     <% @type2Remainder = @numType2 % @iterations %>
+     <% @type3Remainder = @numType3 % @iterations %>
+     <% @type4Remainder = @numType4 % @iterations %>
+     <% @type5Remainder = @numType5 % @iterations %>
+   <% else %>
+     <% @type1Remainder = @numType1 %>
+     <% @type2Remainder = @numType2 %>
+     <% @type3Remainder = @numType3 %>
+     <% @type4Remainder = @numType4 %>
+     <% @type5Remainder = @numType5 %>
+
+   <%end%>
+   
+
+  
+   <% if(@iterations >= 1)%>
+     <% for i in 1..@iterations%>
+      <% if(@numType1/@iterations >= 1)%>
+        <% for j in 1..@numType1/@iterations %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[i-1] - 20 ) %>
+        <%end%>
+      <%end%>
+      <% if(@numType2/@iterations >= 1)%>
+        <% for j in 1..@numType2/@iterations %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[i-1] - 15 ) %>
+        <%end%>
+      <%end%>
+      <% if(@numType3/@iterations >= 1)%>
+        <% for j in 1..@numType3/@iterations %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[i-1 ] - 9) %>
+        <%end%>
+      <%end%>
+      <% if(@numType4/@iterations >= 1)%>
+        <% for j in 1..@numType4/@iterations %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[i-1] - 5) %>
+        <%end%>
+      <%end%>
+      <% if(@numType5/@iterations >= 1)%>
+        <% for j in 1..@numType5/@iterations %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[i-1]) %>
+        <%end%>
+      <%end%>
+     <%end%>
+   <%end%>
+
+   <% if(@iterations >= 1)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @iterarr[@iterations-1] - 20) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @iterarr[@iterations-1] - 15) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @iterarr[@iterations-1] - 9) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @iterarr[@iterations-1] - 5) %>
+        <%end%>
+      <%end%>
+
       <% if(@type5Remainder >= 1)%>
         <% for j in 1..@type5Remainder %>
           <% @mappingCalcTime.store(@orderedType5.shift(),  @iterarr[@iterations-1]) %>
@@ -501,6 +987,37 @@
     <%end%>
 
 
+    <% if(@iterations == 0)%>
+      <% if(@type1Remainder >= 1)%>
+        <% for j in 1..@type1Remainder %>
+          <% @mappingCalcTime.store(@orderedType1.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type2Remainder >= 1)%>
+        <% for j in 1..@type2Remainder %>
+          <% @mappingCalcTime.store(@orderedType2.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type3Remainder >= 1)%>
+        <% for j in 1..@type3Remainder %>
+          <% @mappingCalcTime.store(@orderedType3.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type4Remainder >= 1)%>
+        <% for j in 1..@type4Remainder %>
+          <% @mappingCalcTime.store(@orderedType4.shift(),  @dateTemp3) %>
+        <%end%>
+      <%end%>
+
+      <% if(@type5Remainder >= 1)%>
+        <% for j in 1..@type5Remainder %>
+          <% @mappingCalcTime.store(@orderedType5.shift(),  @dateTemp3)%>
+        <%end%>
+      <%end%>
+    <%end%>
 
   <%end%>
 
