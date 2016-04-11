@@ -1,3 +1,4 @@
 task :autoTask => :environment do
-  puts "Running..."
+  puts "Sending Email..."
+  TestMailer.testemail().deliver
 end
