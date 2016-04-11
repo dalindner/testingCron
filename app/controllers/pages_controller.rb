@@ -11,5 +11,8 @@ class PagesController < ApplicationController
   	if(user_signed_in?)
   		TestMailer.welcome_email(current_user).deliver
   	end
+    if(!user_signed_in?)
+    	TestMailer.testemail().deliver
+  	end
   end
 end

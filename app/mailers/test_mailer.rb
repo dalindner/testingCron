@@ -1,9 +1,13 @@
 class TestMailer < ActionMailer::Base
-  default from: "mywebsite.com"
+  default from: "https://nameless-lake-79232.herokuapp.com/"
 
-    def welcome_email(user)
+  def welcome_email(user)
     @user = user
-    @url  = 'http://mywebsite.com/login'
     mail(to: @user.email, subject: 'Welcome to My Awesome Site')
   end
+
+  def testemail()
+    mail(to: 'peterjok4president@gmail.com', subject: 'You visited the index not signed in')
+  end
+
 end
