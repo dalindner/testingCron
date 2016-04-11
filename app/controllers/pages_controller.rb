@@ -4,15 +4,15 @@ class PagesController < ApplicationController
 
   def contact
   	@b = User.where(:id => 5).first()
-  	TestMailer.welcome_email(@b).deliver
+  	#TestMailer.welcome_email(@b).deliver
   end
 
   def index
   	if(user_signed_in?)
-  		TestMailer.welcome_email(current_user).deliver
+  		#TestMailer.welcome_email(current_user).deliver
   	end
     if(!user_signed_in?)
-    	TestMailer.testemail().deliver
+    	#TestMailer.testemail().deliver
   	end
   end
 end
