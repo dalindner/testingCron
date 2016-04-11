@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   validate :specialtyCheck , :on=>:create
   validate :differentPhones, :on=>:create
-  validate :differentEmails, :on=>:create
+
   validate :leaderCheck, :on=>:create
   validate :adminCheck, :on=>:create
 
