@@ -1,5 +1,5 @@
 class TestMailer < ActionMailer::Base
-  default from: "https://nameless-lake-79232.herokuapp.com/"
+  default from: "test@example.com"
 
   def welcome_email(user)
     @user = user
