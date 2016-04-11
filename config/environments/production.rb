@@ -78,5 +78,6 @@ Rails.application.configure do
 
   # For Devise, need to change to actualy application host when launched
   config.action_mailer.default_url_options = { host: 'https://nameless-lake-79232.herokuapp.com/' }
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
 end
