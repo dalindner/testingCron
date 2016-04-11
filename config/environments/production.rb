@@ -77,6 +77,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # For Devise, need to change to actualy application host when launched
-  config.action_mailer.default_url_options = { host: 'https://shielded-tor-4636.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'https://nameless-lake-79232.herokuapp.com/' }
 
 end
